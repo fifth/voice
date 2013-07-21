@@ -1,0 +1,32 @@
+<div id="header">
+	<ul class='link'>
+	  	<li><b>前往</b></li>
+	  	<li>&nbsp;&nbsp;&nbsp;:::&nbsp;&nbsp;&nbsp;</li>
+	  	<li><a href="http://www.qsc.zju.edu.cn/">求是潮主站</a></li>
+	  	<li>&nbsp;&nbsp;&nbsp;:::&nbsp;&nbsp;&nbsp;</li>
+	  	<li><a href="http://123.myqsc.com/">校网导航</a></li>
+	  	<li>&nbsp;&nbsp;&nbsp;:::&nbsp;&nbsp;&nbsp;</li>
+		<li><a href="http://box.myqsc.com/">Box云U盘</a></li>
+		<li>&nbsp;&nbsp;&nbsp;:::&nbsp;&nbsp;&nbsp;</li>
+		<li><a href="http://www.qsc.zju.edu.cn/apps/share/share/">Share学习交流平台</a></li>
+		<li>&nbsp;&nbsp;&nbsp;:::&nbsp;&nbsp;&nbsp;</li>
+		<li><a href="http://www.qsc.zju.edu.cn/apps/notice/">Notice活动发布平台</a></li>
+	</ul>
+	<ul class='passport'>
+	<present name="notlogin">
+	    <li><a href="{$passport}"><b>尚未登录？</b></a>&nbsp;</li>
+	<else />
+	    <li><a href="{$logout}"><b>注销</b></a>&nbsp;</li>
+	   	<li><b>欢迎您，</b><a href="javascript:" onclick='view({$view})'><b>{$name}</a></b>&nbsp;&nbsp;</li>
+	</present>
+	    <li><a href="javascript:" onclick='slide("searchbox")'><b>搜索</b></a>&nbsp;&nbsp;</li>
+	    <li><a href="javascript:" onclick='slide("toplistbox")'><b>排行榜</b></a>&nbsp;&nbsp;</li>
+	<present name="index">
+	<else />
+	    <li><a href="{:U('/Index/index')}"><b>返回主页</b></a>&nbsp;&nbsp;</li>
+	</present>
+	</ul>
+</div>
+<div id='footer'>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copyright ©2012 &nbsp;&nbsp; 浙江大学党委学生工作部&nbsp;&nbsp;&nbsp;:::&nbsp;&nbsp;&nbsp;求是潮&nbsp;   All Rights Reserved.&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Powered by <a href="http://tech.myqsc.com/">浙江大学 求是潮网站&nbsp; ::: &nbsp;技术研发中心</a></p>
+</div>

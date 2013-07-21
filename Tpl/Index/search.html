@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<title>search</title>
+	<!--外部css文件-->
+	<link rel="stylesheet" type="text/css" href="../Public/css/blue.css" />
+	<link rel="stylesheet" type="text/css" href="../Public/css/main.css" />
+	<!--外部js文件-->
+	<script type="text/javascript" src='../Public/js/jquery.js'></script>
+	<script type="text/javascript" src='../Public/js/jquery.jplayer.min.js'></script>
+	<script type="text/javascript" src='../Public/js/main.js'></script>
+</head>
+<body>
+	<include file="header_footer" />
+	<include file="playerbox" />
+	<div id='search-function'>
+		<p>查询目标：<select id='target'><option value='songname'>歌曲名</option><option value='nickname'>昵称</option><option value='sex'>性别</option><option value='constellation'>星座</option></select></p>
+		<p>查询关键字：<input type='text' id='content' /><input type='button' id='search' value='search' /></p>
+		<p>查询结果：</p>
+		<ul id='result'>
+		</ul>
+	</div>
+
+	<div id='listen'>
+	<img onclick="go('listen')" onmouseover="hover('listen')" onmouseout="hover_cancel('listen')" id='listenimg' src='../Public/pic/listen.png' />
+	</div>
+</body>
+</html>

@@ -1,0 +1,494 @@
+[ 2013-04-10T16:15:54+08:00 ] 0.0.0.0 /voice/index.php/Index/ajax_search?target=nickname&content=%E6%9C%A8
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.003888s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004129s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.072369s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.058860s ]
+SQL: SELECT * FROM `qsc_voice_guest` WHERE ( `nickname` LIKE '%木%' )  [ RunTime:0.074323s ]
+
+[ 2013-04-10T16:15:56+08:00 ] 0.0.0.0 /voice/index.php/Index/ajax_search?target=nickname&content=%E6%9C%A8
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.002732s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003359s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.069738s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.061688s ]
+SQL: SELECT * FROM `qsc_voice_guest` WHERE ( `nickname` LIKE '%木%' )  [ RunTime:0.001297s ]
+
+[ 2013-04-10T17:52:56+08:00 ] ERR: (ThinkException) Access denied for user 'root'@'localhost' (using password: NO)
+[ 2013-04-10T19:19:29+08:00 ] ERR: [4] syntax error, unexpected '=' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 89 行.
+[ 2013-04-10T19:19:51+08:00 ] ERR: [4] syntax error, unexpected '}', expecting ',' or ';' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 91 行.
+[ 2013-04-10T19:20:34+08:00 ] 127.0.0.1 /voice/index.php/Index/ajax_getlist
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.000213s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000442s ]
+
+[ 2013-04-10T19:22:53+08:00 ] 127.0.0.1 /voice/index.php/Index/ajax_getlist
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.000226s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000409s ]
+
+[ 2013-04-10T21:11:39+08:00 ] 127.0.0.1 /voice/index.php/Index/ajax_getlist
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.000871s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001496s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.002717s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.002342s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.002131s ]
+SQL: SELECT `id` FROM `qsc_voice_song`  [ RunTime:0.000624s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 7 ) LIMIT 1   [ RunTime:0.000797s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 2 ) LIMIT 1   [ RunTime:0.000781s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 6 ) LIMIT 1   [ RunTime:0.000658s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 3 ) LIMIT 1   [ RunTime:0.000556s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 5 ) LIMIT 1   [ RunTime:0.000556s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 8 ) LIMIT 1   [ RunTime:0.000546s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000515s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 4 ) LIMIT 1   [ RunTime:0.000660s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 9 ) LIMIT 1   [ RunTime:0.001854s ]
+
+[ 2013-04-10T21:13:39+08:00 ] 127.0.0.1 /voice/index.php/Index/ajax_getlist
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.000830s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001558s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.002581s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.002268s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.002093s ]
+SQL: SELECT `id` FROM `qsc_voice_song`  [ RunTime:0.000239s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 7 ) LIMIT 1   [ RunTime:0.000288s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 8 ) LIMIT 1   [ RunTime:0.000226s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 5 ) LIMIT 1   [ RunTime:0.000230s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 9 ) LIMIT 1   [ RunTime:0.000223s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 3 ) LIMIT 1   [ RunTime:0.000219s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000219s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 2 ) LIMIT 1   [ RunTime:0.000222s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 4 ) LIMIT 1   [ RunTime:0.000251s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 6 ) LIMIT 1   [ RunTime:0.000258s ]
+
+[ 2013-04-10T21:13:48+08:00 ] 127.0.0.1 /voice/index.php/Index/ajax_getlist
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.009278s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002374s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.003200s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.002449s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.002418s ]
+SQL: SELECT `id` FROM `qsc_voice_song`  [ RunTime:0.000291s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 6 ) LIMIT 1   [ RunTime:0.000322s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 3 ) LIMIT 1   [ RunTime:0.000475s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 9 ) LIMIT 1   [ RunTime:0.000218s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000233s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 4 ) LIMIT 1   [ RunTime:0.000305s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 2 ) LIMIT 1   [ RunTime:0.000229s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 5 ) LIMIT 1   [ RunTime:0.000224s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 8 ) LIMIT 1   [ RunTime:0.000226s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 7 ) LIMIT 1   [ RunTime:0.000231s ]
+
+[ 2013-04-10T21:15:17+08:00 ] 127.0.0.1 /voice/index.php/Index/ajax_getlist
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.001129s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001838s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.002636s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.002187s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.001851s ]
+SQL: SELECT `id` FROM `qsc_voice_song`  [ RunTime:0.000213s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 3 ) LIMIT 1   [ RunTime:0.000241s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 2 ) LIMIT 1   [ RunTime:0.000242s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 9 ) LIMIT 1   [ RunTime:0.000227s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000382s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 4 ) LIMIT 1   [ RunTime:0.000268s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 7 ) LIMIT 1   [ RunTime:0.000248s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 5 ) LIMIT 1   [ RunTime:0.000346s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 6 ) LIMIT 1   [ RunTime:0.000258s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 8 ) LIMIT 1   [ RunTime:0.000261s ]
+
+[ 2013-04-10T21:16:44+08:00 ] 127.0.0.1 /voice/index.php/Index/ajax_getlist
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.000822s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001575s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.002686s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.002313s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.006712s ]
+SQL: SELECT `id` FROM `qsc_voice_song`  [ RunTime:0.000317s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 2 ) LIMIT 1   [ RunTime:0.000295s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 4 ) LIMIT 1   [ RunTime:0.000232s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 7 ) LIMIT 1   [ RunTime:0.000300s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 8 ) LIMIT 1   [ RunTime:0.001298s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 9 ) LIMIT 1   [ RunTime:0.000357s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 6 ) LIMIT 1   [ RunTime:0.000234s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 5 ) LIMIT 1   [ RunTime:0.002083s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 3 ) LIMIT 1   [ RunTime:0.000248s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000260s ]
+
+[ 2013-04-10T21:18:15+08:00 ] 127.0.0.1 /voice/index.php/Index/ajax_getlist
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.001097s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001864s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.002831s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.002412s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.002138s ]
+SQL: SELECT `id` FROM `qsc_voice_song`  [ RunTime:0.000252s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 6 ) LIMIT 1   [ RunTime:0.000243s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 9 ) LIMIT 1   [ RunTime:0.000213s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000216s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 8 ) LIMIT 1   [ RunTime:0.000304s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 5 ) LIMIT 1   [ RunTime:0.000209s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 7 ) LIMIT 1   [ RunTime:0.000219s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 4 ) LIMIT 1   [ RunTime:0.000222s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 3 ) LIMIT 1   [ RunTime:0.000230s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 2 ) LIMIT 1   [ RunTime:0.000235s ]
+
+[ 2013-04-10T21:19:31+08:00 ] 127.0.0.1 /voice/index.php/Index/ajax_getlist
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.001104s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001847s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.002727s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.002286s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.002064s ]
+SQL: SELECT `id` FROM `qsc_voice_song`  [ RunTime:0.000293s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 8 ) LIMIT 1   [ RunTime:0.000233s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 5 ) LIMIT 1   [ RunTime:0.000244s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 7 ) LIMIT 1   [ RunTime:0.000359s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 4 ) LIMIT 1   [ RunTime:0.000334s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000225s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 9 ) LIMIT 1   [ RunTime:0.000221s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 6 ) LIMIT 1   [ RunTime:0.000224s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 2 ) LIMIT 1   [ RunTime:0.000220s ]
+NOTIC: [2] Illegal string offset 'id' /home/yujiechao/public_html/voice/Lib/Action/IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 3 ) LIMIT 1   [ RunTime:0.000246s ]
+
+[ 2013-04-10T22:55:43+08:00 ] ERR: (ThinkException) Access denied for user 'root'@'localhost' (using password: YES)
+[ 2013-04-10T22:56:25+08:00 ] 0.0.0.0 /voice/index.php/Index/ajax_getlist
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.009175s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.011520s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.111151s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.074666s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.164724s ]
+SQL: SELECT `id` FROM `qsc_voice_song`  [ RunTime:0.000942s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.001411s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 7 ) LIMIT 1   [ RunTime:0.000841s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 2 ) LIMIT 1   [ RunTime:0.001284s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 8 ) LIMIT 1   [ RunTime:0.000911s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 5 ) LIMIT 1   [ RunTime:0.000840s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 9 ) LIMIT 1   [ RunTime:0.000835s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 6 ) LIMIT 1   [ RunTime:0.000794s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 4 ) LIMIT 1   [ RunTime:0.000770s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 3 ) LIMIT 1   [ RunTime:0.000811s ]
+
+[ 2013-04-10T22:56:45+08:00 ] 0.0.0.0 /voice/index.php/Index/ajax_getlist
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.002692s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003917s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.068942s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.076836s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.040873s ]
+SQL: SELECT `id` FROM `qsc_voice_song`  [ RunTime:0.001296s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 2 ) LIMIT 1   [ RunTime:0.001255s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.001123s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 7 ) LIMIT 1   [ RunTime:0.001312s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 3 ) LIMIT 1   [ RunTime:0.002300s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 6 ) LIMIT 1   [ RunTime:0.000949s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 8 ) LIMIT 1   [ RunTime:0.001130s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 9 ) LIMIT 1   [ RunTime:0.001344s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 4 ) LIMIT 1   [ RunTime:0.000966s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 5 ) LIMIT 1   [ RunTime:0.000932s ]
+NOTIC: [8] Undefined variable: guestinfo F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 109 行.
+SQL: SELECT * FROM `qsc_voice_favorite` WHERE ( `guestid` = null )  [ RunTime:0.001170s ]
+NOTIC: [2] Invalid argument supplied for foreach() F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 112 行.
+NOTIC: [8] Undefined variable: favorite_list F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 118 行.
+
+[ 2013-04-10T22:56:58+08:00 ] 0.0.0.0 /voice/index.php/Index/ajax_getlist
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.003291s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004627s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.060776s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.061318s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.037297s ]
+SQL: SELECT `id` FROM `qsc_voice_song`  [ RunTime:0.001468s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 2 ) LIMIT 1   [ RunTime:0.001225s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 8 ) LIMIT 1   [ RunTime:0.001256s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 5 ) LIMIT 1   [ RunTime:0.001048s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 9 ) LIMIT 1   [ RunTime:0.001697s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 6 ) LIMIT 1   [ RunTime:0.000868s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000812s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 4 ) LIMIT 1   [ RunTime:0.000797s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 7 ) LIMIT 1   [ RunTime:0.000776s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 3 ) LIMIT 1   [ RunTime:0.001268s ]
+NOTIC: [8] Undefined variable: guestinfo F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 109 行.
+SQL: SELECT * FROM `qsc_voice_favorite` WHERE ( `guestid` = null )  [ RunTime:0.001062s ]
+NOTIC: [2] Invalid argument supplied for foreach() F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 112 行.
+NOTIC: [8] Undefined variable: favorite_list F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 118 行.
+
+[ 2013-04-10T22:58:55+08:00 ] 0.0.0.0 /voice/index.php/Index/ajax_getlist
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.020148s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004044s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.058024s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.062340s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.036444s ]
+SQL: SELECT `id` FROM `qsc_voice_song`  [ RunTime:0.001149s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 9 ) LIMIT 1   [ RunTime:0.001230s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 5 ) LIMIT 1   [ RunTime:0.001501s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 6 ) LIMIT 1   [ RunTime:0.001182s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 8 ) LIMIT 1   [ RunTime:0.001359s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.001107s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 3 ) LIMIT 1   [ RunTime:0.000959s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 7 ) LIMIT 1   [ RunTime:0.001152s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 4 ) LIMIT 1   [ RunTime:0.002145s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 2 ) LIMIT 1   [ RunTime:0.001051s ]
+NOTIC: [8] Undefined variable: guestinfo F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 109 行.
+SQL: SELECT * FROM `qsc_voice_favorite` WHERE ( `guestid` = null )  [ RunTime:0.001989s ]
+NOTIC: [2] Invalid argument supplied for foreach() F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 112 行.
+NOTIC: [8] Undefined variable: favorite_list F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 118 行.
+
+[ 2013-04-10T23:00:18+08:00 ] 0.0.0.0 /voice/index.php/Index/ajax_getlist
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.005664s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.019535s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.057441s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.072451s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.037708s ]
+SQL: SELECT `id` FROM `qsc_voice_song`  [ RunTime:0.000940s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 8 ) LIMIT 1   [ RunTime:0.001449s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 2 ) LIMIT 1   [ RunTime:0.001494s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.001192s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 6 ) LIMIT 1   [ RunTime:0.001063s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 3 ) LIMIT 1   [ RunTime:0.001068s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 7 ) LIMIT 1   [ RunTime:0.001733s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 4 ) LIMIT 1   [ RunTime:0.001146s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 5 ) LIMIT 1   [ RunTime:0.001153s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 9 ) LIMIT 1   [ RunTime:0.001073s ]
+NOTIC: [8] Undefined variable: guestinfo F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 109 行.
+SQL: SELECT * FROM `qsc_voice_favorite` WHERE ( `guestid` = null )  [ RunTime:0.001417s ]
+NOTIC: [2] Invalid argument supplied for foreach() F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 112 行.
+NOTIC: [8] Undefined variable: favorite_list F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 118 行.
+
+[ 2013-04-10T23:00:31+08:00 ] 0.0.0.0 /voice/index.php/Index/ajax_getlist
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.003004s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.024571s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.057708s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.062436s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.036453s ]
+SQL: SELECT `id` FROM `qsc_voice_song`  [ RunTime:0.000902s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 7 ) LIMIT 1   [ RunTime:0.000994s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000794s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 4 ) LIMIT 1   [ RunTime:0.000799s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 3 ) LIMIT 1   [ RunTime:0.000810s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 6 ) LIMIT 1   [ RunTime:0.000782s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 2 ) LIMIT 1   [ RunTime:0.000794s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 5 ) LIMIT 1   [ RunTime:0.000767s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 9 ) LIMIT 1   [ RunTime:0.001227s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 8 ) LIMIT 1   [ RunTime:0.000795s ]
+NOTIC: [8] Undefined variable: guestinfo F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 109 行.
+SQL: SELECT * FROM `qsc_voice_favorite` WHERE ( `guestid` = null )  [ RunTime:0.001574s ]
+NOTIC: [2] Invalid argument supplied for foreach() F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 112 行.
+NOTIC: [8] Undefined variable: favorite_list F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 118 行.
+
+[ 2013-04-10T23:01:31+08:00 ] 0.0.0.0 /voice/index.php/Index/ajax_getlist
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.009793s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003733s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.058422s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.060282s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.034721s ]
+SQL: SELECT `id` FROM `qsc_voice_song`  [ RunTime:0.000847s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 4 ) LIMIT 1   [ RunTime:0.001021s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 7 ) LIMIT 1   [ RunTime:0.000796s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 8 ) LIMIT 1   [ RunTime:0.000794s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 6 ) LIMIT 1   [ RunTime:0.000850s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 2 ) LIMIT 1   [ RunTime:0.000979s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 9 ) LIMIT 1   [ RunTime:0.000900s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 5 ) LIMIT 1   [ RunTime:0.000881s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000799s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 3 ) LIMIT 1   [ RunTime:0.000776s ]
+NOTIC: [8] Undefined variable: guestinfo F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 109 行.
+SQL: SELECT * FROM `qsc_voice_favorite` WHERE ( `guestid` = null )  [ RunTime:0.001148s ]
+NOTIC: [2] Invalid argument supplied for foreach() F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 112 行.
+NOTIC: [8] Undefined variable: favorite_list F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 118 行.
+
+[ 2013-04-10T23:01:51+08:00 ] 0.0.0.0 /voice/index.php/Index/ajax_getlist
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.011186s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.007289s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.065987s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.069014s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.050735s ]
+SQL: SELECT `id` FROM `qsc_voice_song`  [ RunTime:0.001748s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 5 ) LIMIT 1   [ RunTime:0.001725s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 6 ) LIMIT 1   [ RunTime:0.001437s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 8 ) LIMIT 1   [ RunTime:0.001155s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.001112s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 9 ) LIMIT 1   [ RunTime:0.001209s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 7 ) LIMIT 1   [ RunTime:0.001074s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 4 ) LIMIT 1   [ RunTime:0.001181s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 2 ) LIMIT 1   [ RunTime:0.001211s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 3 ) LIMIT 1   [ RunTime:0.001567s ]
+NOTIC: [8] Undefined variable: guestinfo F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 109 行.
+SQL: SELECT * FROM `qsc_voice_favorite` WHERE ( `guestid` = null )  [ RunTime:0.001241s ]
+NOTIC: [2] Invalid argument supplied for foreach() F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 112 行.
+NOTIC: [8] Undefined variable: favorite_list F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 118 行.
+
+[ 2013-04-10T23:03:12+08:00 ] 0.0.0.0 /voice/index.php/Index/ajax_getlist
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.003240s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.006457s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.058963s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.060952s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.035516s ]
+SQL: SELECT `id` FROM `qsc_voice_song`  [ RunTime:0.000911s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.001609s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 7 ) LIMIT 1   [ RunTime:0.000881s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 6 ) LIMIT 1   [ RunTime:0.000801s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 4 ) LIMIT 1   [ RunTime:0.000808s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 8 ) LIMIT 1   [ RunTime:0.000800s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 5 ) LIMIT 1   [ RunTime:0.000796s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 2 ) LIMIT 1   [ RunTime:0.000848s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 9 ) LIMIT 1   [ RunTime:0.000835s ]
+NOTIC: [2] Illegal string offset 'id' F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 98 行.
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 3 ) LIMIT 1   [ RunTime:0.000969s ]
+NOTIC: [8] Undefined variable: guestinfo F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 109 行.
+SQL: SELECT * FROM `qsc_voice_favorite` WHERE ( `guestid` = null )  [ RunTime:0.001066s ]
+NOTIC: [2] Invalid argument supplied for foreach() F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 112 行.
+NOTIC: [8] Undefined variable: favorite_list F:\wamp\wamp\www\voice\Lib\Action\IndexAction.class.php 第 118 行.
+

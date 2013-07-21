@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<title>listen</title>
+	<!--外部css文件-->
+	<link rel="stylesheet" type="text/css" href="../Public/css/blue.css" />
+	<link rel="stylesheet" type="text/css" href="../Public/css/main.css" />
+	<!--外部js文件-->
+	<script type="text/javascript" src='../Public/js/jquery.js'></script>
+	<script type="text/javascript" src='../Public/js/jquery.jplayer.min.js'></script>
+	<script type="text/javascript" src='../Public/js/main.js'></script>
+</head>
+<body>
+	<include file="header_footer" />
+	<div id='listen-function'>
+		<div class='welcome'>
+		<present name='notlogin'>
+			<p>您还没有登陆呦！<a href="{$passport}">戳我登陆</a></p>
+		<else />
+			<p>欢迎您，{$name}：<a href="{$view}">进入个人管理</a></p>
+		</present>
+		</div>
+		<include file="playerbox" />
+		<div class='playlist'>
+			<ul id='nowlist'>
+			<volist name='song_list' id='vo'>
+			<li><a href="" onclick="choose({$vo.id});return false">{$vo.name}</a>[BY]<a href="./view?guestid={$vo.singerid}">{$vo.singer}</a></li>
+			</volist>
+			</ul>
+			<ul id='favoritelist'>
+			<volist name='favorite_list' id='vo'>
+			<li><a href="" onclick="choose({$vo.id});return false">{$vo.name}</a>[BY]<a href="./view?guestid={$vo.singerid}">{$vo.singer}</a></li>
+			</volist>
+			</ul>
+		</div>	
+	</div>
+
+	<div id='listen'>
+	<img onclick="go('search')" onmouseover="hover('listen')" onmouseout="hover_cancel('listen')" id='listenimg' src='../Public/pic/listen.png' />
+	</div>
+	<script type="text/javascript">
+		$('#controller').css('display','block');
+	</script>
+</body>
+</html>

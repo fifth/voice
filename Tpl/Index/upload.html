@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<title>upload</title>
+	<!--外部css文件-->
+	<link rel="stylesheet" type="text/css" href="../Public/css/main.css" />
+	<!--外部js文件-->
+	<script type="text/javascript" src="../Public/js/jquery.js"></script>
+	<script type="text/javascript" src="../Public/js/main.js"></script>
+<body>
+	<include file="header_footer" />
+
+	<div id='upload'>
+	<img onclick="go('listen')" onmouseover="hover('upload')" onmouseout="hover_cancel('upload')" id='uploadimg' src='../Public/pic/upload.png' />
+	</div>
+
+	<div id='upload-function'>
+		<br />
+	<form action='./upload_submit' method='post' enctype='multipart/form-data'>
+	<br />
+	<br />
+	<div id='welcome'>
+		<p>欢迎您，{$name}：<br />&nbsp;&nbsp;&nbsp;&nbsp;您已上传{$num}首歌，这是您上传的第{$newnum}首歌。</p>
+	</div>
+	<br />
+	<div>
+		<p>请选择您要上传的歌曲&nbsp;<a href="">上传遇到问题？</a></p>
+		<input type='text' id='upbox' readonly='readonly' placeholder='请选择mp3格式的音乐文件' />
+		<input type='file' id='uploadfile' name='song' />
+		<input type='button' id='browse' value='选择文件' />
+		<br />
+		<br />
+		<p>请输入歌曲名：</p>
+		<input type='text' id='textbox' name='songname' placeholder='请在此输入歌曲名' />
+		<br />
+		<br />
+		<p>说几句吧？</p>
+		<textarea name='message' cols='29' rows='5' placeholder='leave a message'></textarea>
+		<br />
+		<br />
+		<p><input type='checkbox' id='read' />我已阅读并同意&nbsp;<a href="">《歌曲上传须知》</a></p>
+		<input type='submit' id='submit' disabled='disabled' value='确认无误，上传' />
+		<span id="uploading">正在上传......</span>
+	</div>
+	</form>
+	</div>
+
+</body>
+</html>
