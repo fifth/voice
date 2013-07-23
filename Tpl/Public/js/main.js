@@ -90,7 +90,7 @@
 			});
 			$('#jquery_jplayer_1').jPlayer({
 			ready:function(){
-				$.get('/voice/index.php/Index/ajax_get',function(data){
+				$.get('/voice/index.php/Index/ajax?action=play',function(data){
 					now=data;
 					detail();
 					$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
@@ -99,7 +99,7 @@
 				},'json');
 			},
 			ended:function(){
-				$.get('/voice/index.php/Index/ajax_get',function(data){
+				$.get('/voice/index.php/Index/ajax?action=next',function(data){
 					now=data;
 					detail();
 					$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
@@ -131,7 +131,6 @@
 			$.get('/voice/index.php/Index/ajax_gettoplist',function(data){
 
 			});
-
 			break;
 		default:
 			slideout('searchbox');
@@ -166,14 +165,13 @@
 		$('#detail').remove();
 		$('div.detail').append("<p id='detail'>正在播放：<br />"+now.name+"[BY]<a href='javascript:' onclick='view("+now.singerid+")'>"+now.singer+"</a><br />--------------------<br />"+now.message+"</p>");
 		$.get('/voice/index.php/Index/ajax_likeOrNot?songid='+now.id,function(data){
-			if (data) {
+			// alert('s');
+			if (data==1) {
 				content='like_hover';
 			} else {
 				content='like'
 			}
 			$(".jp-like").css("background-image","url(/voice/Tpl/Public/pic/"+content+".png)");
-			$(".jp-like").mouseover(function(){$(".jp-like").css("background-image","url(/voice/Tpl/Public/pic/like_hover.png)");});
-			$(".jp-like").mouseout(function(){$(".jp-like").css("background-image","url(/voice/Tpl/Public/pic/"+content+".png)");});
 		},'text');
 	}
 //查看个人信息
@@ -394,8 +392,18 @@
 		// 	supplied:'mp3'
 		// });
 	//下一首
-		$('#next').click(function(){
-			$.get('/voice/index.php/Index/ajax_get',function(data){
+		$('.jp-next').click(function(){
+			$.get('/voice/index.php/Index/ajax?action=next',function(data){
+				now=data;
+				detail();
+				$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
+					mp3 :'/voice/Upload/song/'+now.address
+				}).jPlayer('play');
+			},'json')
+		});
+		$('.jp-previous').click(function(){
+			//alert('d');
+			$.get('/voice/index.php/Index/ajax?action=previous',function(data){
 				now=data;
 				detail();
 				$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
@@ -426,8 +434,61 @@
 			$('#order').val(action);
 		});
 	//收藏/取消收藏
-		$('.jp-like').click(function(){
-			var action=$('.jp-like').css("background-image");
+		// $('.jp-like').click(function(){
+		// 	var action=$('.jp-like').css("background-image");
+		// 	if (action.match("like_hover")) {
+		// 		action=1;
+		// 	} else {
+		// 		action=0;
+		// 	}
+		// 	$.get('/voice/index.php/Index/ajax_like?action='+action,function(data){
+		// 		if (data) {
+		// 			$(".jp-like").css("background-image","url(/voice/Tpl/Public/pic/like_hover.png)");
+		// 		} else if (!action) {
+		// 			$(".jp-like").css("background-image","url(/voice/Tpl/Public/pic/like.png)");
+		// 		}
+		// 		$.get('/voice/index.php/Index/ajax?action=getfavoritelist',function(data){
+		// 			data = eval("("+data+")");
+		// 			$('#favoritelist').empty();
+		// 			htmldata = '<ul>';
+		// 			if (data!=0) {
+		// 				for (var i = 0; i < data.length; i++) {
+		// 					htmldata += "<li><a href='javascript:' onclick='choose(";
+		// 					htmldata += data[i].id;
+		// 					htmldata += ")'>";
+		// 					htmldata += data[i].name;
+		// 					htmldata += "</a>[BY]<a href='javascript:' onclick='view(";
+		// 					htmldata += data[i].singerid;
+		// 					htmldata += ")'>";
+		// 					htmldata += data[i].singer;
+		// 					htmldata += "</a></li>";
+		// 				};
+		// 			} else {
+		// 				htmldata += 'not login';
+		// 			}
+		// 			htmldata += '</ul>';
+		// 			$('#favoritelist').append(htmldata);
+		// 	});
+		// 	},'json');
+		// });
+	})
+
+/*****************************************************/
+
+function like_hover(){
+	$(".jp-like").css("background-image","url(/voice/Tpl/Public/pic/like_hover.png)");
+}
+function like_default(){
+	$.get('/voice/index.php/Index/ajax_likeOrNot?songid='+now.id,function(data){
+		if (data==1) {
+			$(".jp-like").css("background-image","url(/voice/Tpl/Public/pic/like_hover.png)");
+		} else {
+			$(".jp-like").css("background-image","url(/voice/Tpl/Public/pic/like.png)");
+		}
+	},'text');
+}
+function like_click(){
+	var action=$('.jp-like').css("background-image");
 			if (action.match("like_hover")) {
 				action=1;
 			} else {
@@ -439,7 +500,7 @@
 				} else if (!action) {
 					$(".jp-like").css("background-image","url(/voice/Tpl/Public/pic/like.png)");
 				}
-				$.post('/voice/index.php/Index/ajax_getfavoritelist',function(data){
+				$.get('/voice/index.php/Index/ajax?action=getfavoritelist',function(data){
 					data = eval("("+data+")");
 					$('#favoritelist').empty();
 					htmldata = '<ul>';
@@ -462,7 +523,4 @@
 					$('#favoritelist').append(htmldata);
 			});
 			},'json');
-		});
-	})
-
-/*****************************************************/
+}

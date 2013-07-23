@@ -71,7 +71,7 @@
 		    	            <li><a href="javascript:;" class="jp-previous" tabindex="1">previous</a></li>
 		    	            <li><a href="javascript:;" class="jp-next" tabindex="1">next</a></li>
 		    	            <?php if(isset($notlogin)): else: ?>
-								<li><a href="javascript:;" class="jp-like" tabindex="1">like</a></li><?php endif; ?>
+								<li><a href="javascript:;" class="jp-like" tabindex="1" onclick="like_click()" onmouseover="like_hover()" onmouseout="like_default()">like</a></li><?php endif; ?>
 							<li><a href="javascript:;" class="jp-random" tabindex="1">random</a></li>
 							<li><a href="javascript:;" class="jp-circle" tabindex="1">circle</a></li>
 		                    <li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>

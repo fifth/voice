@@ -97,7 +97,7 @@ class IndexAction extends Action{
         switch ($action) {
             case 'getalllist'://获取所有歌曲列表，返回json格式的数组
                 $song_id_list=$song->getField('id',true);
-                shuffle($song_id_list);
+                //shuffle($song_id_list);
                 foreach ($song_id_list as $key => $value) {
                     $search['id']=$value;
                     $song_list[]=$song->where($search)->find();
@@ -105,11 +105,10 @@ class IndexAction extends Action{
                 }
                 unset($search);
                 setcookie('list',json_encode($song_id_list));
-                setcookie('nowplaying',-1);
+                setcookie('nowplaying',0);
                 setcookie('random',0);
                 setcookie('circle',0);
-                echo json_encode($song_list);  
-                die();  
+                echo json_encode($song_list);
                 break;
             case 'getfavoritelist'://获取已收藏的歌曲，返回json格式的数组，若未登录则返回0
                 //验证是否登陆
@@ -141,69 +140,123 @@ class IndexAction extends Action{
                 } else {
                     echo 0;
                 }
-                die();
+                break;
+            case 'play':
+                if (!isset($_COOKIE['list'])) {
+                    die();
+                }
+                //从cookie获取播放信息
+                $song_id_list=json_decode($this->cookie2json($_COOKIE['list']),true);
+                if (isset($_COOKIE['nowplaying'])) {
+                    $nowplaying=(int)$_COOKIE['nowplaying'];
+                } else {
+                    $nowplaying=0;
+                }
+                $search['id']=$song_id_list[$nowplaying];
+                $re=$song->where($search)->find();
+                $re['singer']=$guest->where('id='.$re['singerid'])->getField('nickname');
+                echo json_encode($re);
+                break;
+            case 'next':
+                if (!isset($_COOKIE['list'])) {
+                    die();
+                }
+                //从cookie获取播放信息
+                $song_id_list=json_decode($this->cookie2json($_COOKIE['list']),true);
+                if (isset($_COOKIE['nowplaying'])) {
+                    $nowplaying=(int)$_COOKIE['nowplaying'];
+                } else {
+                    $nowplaying=0;
+                }
+                $nowplaying++;
+                $search['id']=$song_id_list[$nowplaying];
+                $re=$song->where($search)->find();
+                $re['singer']=$guest->where('id='.$re['singerid'])->getField('nickname');
+                setcookie('nowplaying',$nowplaying);
+                echo json_encode($re);
+                break;
+            case 'previous':
+                if (!isset($_COOKIE['list'])) {
+                    die();
+                }
+                //从cookie获取播放信息
+                $song_id_list=json_decode($this->cookie2json($_COOKIE['list']),true);
+                if (isset($_COOKIE['nowplaying'])) {
+                    $nowplaying=(int)$_COOKIE['nowplaying'];
+                } else {
+                    $nowplaying=0;
+                }
+                $nowplaying--;
+                $search['id']=$song_id_list[$nowplaying];
+                $re=$song->where($search)->find();
+                $re['singer']=$guest->where('id='.$re['singerid'])->getField('nickname');
+                setcookie('nowplaying',$nowplaying);
+                echo json_encode($re);
+                break;
+            case 'like':
+                
                 break;
             default:
                 
                 break;
          }
     }
-    public function ajax_getalllist(){
+    // public function ajax_getalllist(){
     
-        $guest=M('guest');
-        $song=M('song');
-        $news=M('news');
-        $favorite=M('favorite');
-        $hotsong=M('hotsong');
-        $hotsinger=M('hotsinger');
-        $upload=M('upload');
+    //     $guest=M('guest');
+    //     $song=M('song');
+    //     $news=M('news');
+    //     $favorite=M('favorite');
+    //     $hotsong=M('hotsong');
+    //     $hotsinger=M('hotsinger');
+    //     $upload=M('upload');
 
-        $song_id_list=$song->getField('id',true);
-        shuffle($song_id_list);
-        foreach ($song_id_list as $key => $value) {
-            $search['id']=$value;
-            $song_list[]=$song->where($search)->find();
-            $song_list[$key]['singer']=$guest->where('id='.$song_list[$key]['singerid'])->getField('nickname');
-        }
-        unset($search);
-        setcookie('list',json_encode($song_id_list));
-        setcookie('nowplaying',-1);
-        setcookie('random',0);
-        setcookie('circle',0);
-        echo json_encode($song_list);
-    }
-    public function ajax_getfavoritelist(){
+    //     $song_id_list=$song->getField('id',true);
+    //     shuffle($song_id_list);
+    //     foreach ($song_id_list as $key => $value) {
+    //         $search['id']=$value;
+    //         $song_list[]=$song->where($search)->find();
+    //         $song_list[$key]['singer']=$guest->where('id='.$song_list[$key]['singerid'])->getField('nickname');
+    //     }
+    //     unset($search);
+    //     setcookie('list',json_encode($song_id_list));
+    //     setcookie('nowplaying',-1);
+    //     setcookie('random',0);
+    //     setcookie('circle',0);
+    //     echo json_encode($song_list);
+    // }
+    // public function ajax_getfavoritelist(){
     
-        //验证是否登陆
-        $a=$this->check_session();
-        if ($a!=0) {
+    //     //验证是否登陆
+    //     $a=$this->check_session();
+    //     if ($a!=0) {
 
-            $guest=M('guest');
-            $song=M('song');
-            $news=M('news');
-            $favorite=M('favorite');
-            $hotsong=M('hotsong');
-            $hotsinger=M('hotsinger');
-            $upload=M('upload');
+    //         $guest=M('guest');
+    //         $song=M('song');
+    //         $news=M('news');
+    //         $favorite=M('favorite');
+    //         $hotsong=M('hotsong');
+    //         $hotsinger=M('hotsinger');
+    //         $upload=M('upload');
 
-            $search['stuid']=$a['stuid'];
-            $guestinfo=$guest->where($search)->find();
-            unset($search);
-            $search['guestid']=$guestinfo['id'];
-            $song_id_list=$favorite->where($search)->select();
-            unset($search);
-            foreach ($song_id_list as $key => $value) {
-                $search['id']=$value['songid'];
-                $song_list[]=$song->where($search)->find();
-                $song_list[$key]['singer']=$guest->where('id='.$song_list[$key]['singerid'])->getField('nickname');
-                //$search['id']被覆盖，不需要清空
-            }
-            unset($search);
-            echo json_encode($song_list);
-        } else {
-            echo 0;
-        }
-    }
+    //         $search['stuid']=$a['stuid'];
+    //         $guestinfo=$guest->where($search)->find();
+    //         unset($search);
+    //         $search['guestid']=$guestinfo['id'];
+    //         $song_id_list=$favorite->where($search)->select();
+    //         unset($search);
+    //         foreach ($song_id_list as $key => $value) {
+    //             $search['id']=$value['songid'];
+    //             $song_list[]=$song->where($search)->find();
+    //             $song_list[$key]['singer']=$guest->where('id='.$song_list[$key]['singerid'])->getField('nickname');
+    //             //$search['id']被覆盖，不需要清空
+    //         }
+    //         unset($search);
+    //         echo json_encode($song_list);
+    //     } else {
+    //         echo 0;
+    //     }
+    // }
     // public function ajax_getsonglist(){
     //     //数据库连接
     //     $guest=M('guest');
@@ -251,8 +304,8 @@ class IndexAction extends Action{
 
     //     echo json_encode($returnlist);
     // }
-    public function ajax_gettoplist(){
-    }
+    // public function ajax_gettoplist(){
+    // }
     public function ajax_changeList(){
     //ajax动作，用作切换播放列表
         //连接数据库
