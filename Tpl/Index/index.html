@@ -45,14 +45,14 @@
 			                <li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
 		    	            <li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
 		        	        <li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>
-		    	            <li><a href="javascript:;" class="jp-previous" tabindex="1">previous</a></li>
-		    	            <li><a href="javascript:;" class="jp-next" tabindex="1">next</a></li>
+		    	            <li><a href="javascript:;" class="jp-previous" tabindex="1" onclick="previous_click()">previous</a></li>
+		    	            <li><a href="javascript:;" class="jp-next" tabindex="1" onclick="next_click()">next</a></li>
 		    	            <present name='notlogin'>
 							<else />
 								<li><a href="javascript:;" class="jp-like" tabindex="1" onclick="like_click()" onmouseover="like_hover()" onmouseout="like_default()">like</a></li>
 							</present>
-							<li><a href="javascript:;" class="jp-random" tabindex="1">random</a></li>
-							<li><a href="javascript:;" class="jp-circle" tabindex="1">circle</a></li>
+							<li><a href="javascript:;" class="jp-random" tabindex="1" onclick="random_click()">random</a></li>
+							<li><a href="javascript:;" class="jp-circle" tabindex="1" onclick="circle_click()">circle</a></li>
 		                    <li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>
 		               	    <li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
 		                   	<li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>

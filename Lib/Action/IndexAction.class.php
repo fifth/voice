@@ -168,9 +168,22 @@ class IndexAction extends Action{
                 } else {
                     $nowplaying=0;
                 }
-                $nowplaying++;
+                $circle=$_COOKIE['circle'];
+                $random=$_COOKIE['random'];
+                if ($random==1) {
+                    $nowplaying=rand(0,count($song_id_list)-1);
+                } else {
+                    $nowplaying++;
+                }
+                if (($nowplaying>=count($song_id_list))&&($circle==1)) {
+                    $nowplaying=0;
+                }
                 $search['id']=$song_id_list[$nowplaying];
                 $re=$song->where($search)->find();
+                if ($re==null) {
+                    setcookie('nowplaying',$nowplaying);
+                    break;
+                }
                 $re['singer']=$guest->where('id='.$re['singerid'])->getField('nickname');
                 setcookie('nowplaying',$nowplaying);
                 echo json_encode($re);
@@ -186,9 +199,22 @@ class IndexAction extends Action{
                 } else {
                     $nowplaying=0;
                 }
-                $nowplaying--;
+                $circle=$_COOKIE['circle'];
+                $random=$_COOKIE['random'];
+                if ($random==1) {
+                    $nowplaying=rand(0,count($song_id_list)-1);
+                } else {
+                    $nowplaying--;
+                }
+                if (($nowplaying<0)&&($circle==1)) {
+                    $nowplaying=count($song_id_list)-1;
+                }
                 $search['id']=$song_id_list[$nowplaying];
                 $re=$song->where($search)->find();
+                if ($re==null) {
+                    setcookie('nowplaying',$nowplaying);
+                    break;
+                }
                 $re['singer']=$guest->where('id='.$re['singerid'])->getField('nickname');
                 setcookie('nowplaying',$nowplaying);
                 echo json_encode($re);
@@ -756,28 +782,28 @@ class IndexAction extends Action{
             case 'songname':
                 $search['name']=array('like',$content);
                 foreach ($song->where($search)->select() as $key => $value) {
-                    $result[]="<a href='' onclick='choose(".$value['id'].");return false'>".$value['name']."</a>[BY]<a href='/voice/index.php/Index/view?guestid=".$value['singerid']."'>".$value['singer']."</a>";
+                    $result[]="<a href='' onclick='choose(".$value['id'].");return false'>".$value['name']."</a>[BY]<a href='/fifth/voice/index.php/Index/view?guestid=".$value['singerid']."'>".$value['singer']."</a>";
                 }
                 unset($search);
                 break;
             case 'nickname':
                 $search['nickname']=array('like',$content);
                 foreach ($guest->where($search)->select() as $key => $value) {
-                    $result[]="<a href='/voice/index.php/Index/view?guestid=".$value['id']."'>".$value['nickname']."</a>";
+                    $result[]="<a href='/fifth/voice/index.php/Index/view?guestid=".$value['id']."'>".$value['nickname']."</a>";
                 }
                 unset($search);
                 break;
             case 'constellation':
                 $search['constellation']=array('like',$content);
                 foreach ($guest->where($search)->select() as $key => $value) {
-                    $result[]="[".$value['constellation']."]<a href='/voice/index.php/Index/view?guestid=".$value['id']."'>".$value['nickname']."</a>";
+                    $result[]="[".$value['constellation']."]<a href='/fifth/voice/index.php/Index/view?guestid=".$value['id']."'>".$value['nickname']."</a>";
                 }
                 unset($search);
                 break;
             case 'sex':
                 $search['sex']=array('like',$content);
                 foreach ($guest->where($search)->select() as $key => $value) {
-                    $result[]="[".$value['sex']."]<a href='/voice/index.php/Index/view?guestid=".$value['id']."'>".$value['nickname']."</a>";
+                    $result[]="[".$value['sex']."]<a href='/fifth/voice/index.php/Index/view?guestid=".$value['id']."'>".$value['nickname']."</a>";
                 }
                 unset($search);
                 break;

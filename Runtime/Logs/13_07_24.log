@@ -1,0 +1,425 @@
+[ 2013-07-24T16:22:42+08:00 ] 0.0.0.0 /fifth/voice/index.php/Index/ajax?action=getfavoritelist
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.001632s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001401s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.009277s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.006542s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_news` [ RunTime:0.006466s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.006715s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsong` [ RunTime:0.006020s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsinger` [ RunTime:0.006775s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_upload` [ RunTime:0.005145s ]
+SQL: SELECT * FROM `qsc_voice_guest` WHERE ( `stuid` = '3120103005' ) LIMIT 1   [ RunTime:0.000604s ]
+SQL: SELECT * FROM `qsc_voice_favorite` WHERE ( `guestid` = 1 )  [ RunTime:0.000657s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000710s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000635s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 4 ) LIMIT 1   [ RunTime:0.000421s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=2 LIMIT 1   [ RunTime:0.000290s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 7 ) LIMIT 1   [ RunTime:0.000451s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=7 LIMIT 1   [ RunTime:0.000619s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 9 ) LIMIT 1   [ RunTime:0.000566s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000337s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 2 ) LIMIT 1   [ RunTime:0.000598s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000617s ]
+
+[ 2013-07-24T16:22:43+08:00 ] 0.0.0.0 /fifth/voice/index.php/Index/ajax?action=getalllist
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.002747s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001694s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.006530s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.009623s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_news` [ RunTime:0.008045s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.007860s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsong` [ RunTime:0.007740s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsinger` [ RunTime:0.006623s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_upload` [ RunTime:0.004829s ]
+SQL: SELECT `id` FROM `qsc_voice_song`  [ RunTime:0.000552s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000585s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000444s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 2 ) LIMIT 1   [ RunTime:0.000434s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000381s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 3 ) LIMIT 1   [ RunTime:0.000730s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000376s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 4 ) LIMIT 1   [ RunTime:0.000378s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=2 LIMIT 1   [ RunTime:0.000452s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 5 ) LIMIT 1   [ RunTime:0.000513s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000578s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 6 ) LIMIT 1   [ RunTime:0.000501s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000404s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 7 ) LIMIT 1   [ RunTime:0.000712s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=7 LIMIT 1   [ RunTime:0.000339s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 8 ) LIMIT 1   [ RunTime:0.000489s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=8 LIMIT 1   [ RunTime:0.000296s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 9 ) LIMIT 1   [ RunTime:0.000593s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000620s ]
+
+[ 2013-07-24T16:22:43+08:00 ] 0.0.0.0 /fifth/voice/index.php/Index/ajax?action=play
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.001758s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001774s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.007282s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.006273s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_news` [ RunTime:0.005276s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.005337s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsong` [ RunTime:0.004562s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsinger` [ RunTime:0.005543s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_upload` [ RunTime:0.006474s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000523s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000320s ]
+
+[ 2013-07-24T16:22:43+08:00 ] 0.0.0.0 /fifth/voice/index.php/Index/ajax_likeOrNot?songid=1
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.001672s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001731s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.005660s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.005587s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.004506s ]
+SQL: SELECT * FROM `qsc_voice_guest` WHERE ( `stuid` = '3120103005' ) LIMIT 1   [ RunTime:0.000774s ]
+SQL: SELECT * FROM `qsc_voice_favorite` WHERE ( `guestid` = 1 ) AND ( `songid` = 1 ) LIMIT 1   [ RunTime:0.000419s ]
+
+[ 2013-07-24T16:22:47+08:00 ] 0.0.0.0 /fifth/voice/index.php/Index/ajax?action=getalllist
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.001621s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001625s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.007899s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.006892s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_news` [ RunTime:0.006638s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.006615s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsong` [ RunTime:0.006387s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsinger` [ RunTime:0.007716s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_upload` [ RunTime:0.005576s ]
+SQL: SELECT `id` FROM `qsc_voice_song`  [ RunTime:0.000922s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000629s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000451s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 2 ) LIMIT 1   [ RunTime:0.000569s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000530s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 3 ) LIMIT 1   [ RunTime:0.000507s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000624s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 4 ) LIMIT 1   [ RunTime:0.000822s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=2 LIMIT 1   [ RunTime:0.000476s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 5 ) LIMIT 1   [ RunTime:0.000362s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000276s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 6 ) LIMIT 1   [ RunTime:0.000307s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000307s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 7 ) LIMIT 1   [ RunTime:0.005327s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=7 LIMIT 1   [ RunTime:0.000594s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 8 ) LIMIT 1   [ RunTime:0.000542s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=8 LIMIT 1   [ RunTime:0.000337s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 9 ) LIMIT 1   [ RunTime:0.000418s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000491s ]
+
+[ 2013-07-24T16:22:47+08:00 ] 0.0.0.0 /fifth/voice/index.php/Index/ajax?action=getfavoritelist
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.001676s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001869s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.009202s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.007951s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_news` [ RunTime:0.006622s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.006439s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsong` [ RunTime:0.005578s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsinger` [ RunTime:0.007260s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_upload` [ RunTime:0.004497s ]
+SQL: SELECT * FROM `qsc_voice_guest` WHERE ( `stuid` = '3120103005' ) LIMIT 1   [ RunTime:0.000742s ]
+SQL: SELECT * FROM `qsc_voice_favorite` WHERE ( `guestid` = 1 )  [ RunTime:0.000688s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000694s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000538s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 4 ) LIMIT 1   [ RunTime:0.000589s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=2 LIMIT 1   [ RunTime:0.000436s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 7 ) LIMIT 1   [ RunTime:0.000372s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=7 LIMIT 1   [ RunTime:0.000295s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 9 ) LIMIT 1   [ RunTime:0.000334s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000319s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 2 ) LIMIT 1   [ RunTime:0.000323s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000255s ]
+
+[ 2013-07-24T16:22:47+08:00 ] 0.0.0.0 /fifth/voice/index.php/Index/ajax?action=play
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.002448s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002152s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.006972s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.005067s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_news` [ RunTime:0.005785s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.005149s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsong` [ RunTime:0.004798s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsinger` [ RunTime:0.005229s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_upload` [ RunTime:0.005951s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000661s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000473s ]
+
+[ 2013-07-24T16:22:47+08:00 ] 0.0.0.0 /fifth/voice/index.php/Index/ajax_likeOrNot?songid=1
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.001703s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002027s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.005670s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.005604s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.005488s ]
+SQL: SELECT * FROM `qsc_voice_guest` WHERE ( `stuid` = '3120103005' ) LIMIT 1   [ RunTime:0.000534s ]
+SQL: SELECT * FROM `qsc_voice_favorite` WHERE ( `guestid` = 1 ) AND ( `songid` = 1 ) LIMIT 1   [ RunTime:0.000778s ]
+
+[ 2013-07-24T16:22:53+08:00 ] 0.0.0.0 /fifth/voice/index.php/Index/ajax?action=getalllist
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.001364s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001222s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.008505s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.008471s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_news` [ RunTime:0.007845s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.007889s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsong` [ RunTime:0.006933s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsinger` [ RunTime:0.006733s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_upload` [ RunTime:0.004861s ]
+SQL: SELECT `id` FROM `qsc_voice_song`  [ RunTime:0.000372s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000530s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000338s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 2 ) LIMIT 1   [ RunTime:0.000357s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000320s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 3 ) LIMIT 1   [ RunTime:0.000406s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000368s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 4 ) LIMIT 1   [ RunTime:0.000698s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=2 LIMIT 1   [ RunTime:0.000592s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 5 ) LIMIT 1   [ RunTime:0.000391s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000290s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 6 ) LIMIT 1   [ RunTime:0.001009s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000635s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 7 ) LIMIT 1   [ RunTime:0.000514s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=7 LIMIT 1   [ RunTime:0.000330s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 8 ) LIMIT 1   [ RunTime:0.000532s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=8 LIMIT 1   [ RunTime:0.000395s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 9 ) LIMIT 1   [ RunTime:0.000758s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000356s ]
+
+[ 2013-07-24T16:22:53+08:00 ] 0.0.0.0 /fifth/voice/index.php/Index/ajax?action=getfavoritelist
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.001777s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001528s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.004732s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.004730s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_news` [ RunTime:0.004237s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.004003s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsong` [ RunTime:0.005947s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsinger` [ RunTime:0.004924s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_upload` [ RunTime:0.004745s ]
+
+[ 2013-07-24T16:22:53+08:00 ] 0.0.0.0 /fifth/voice/index.php/Index/ajax?action=play
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.001383s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001276s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.004967s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.004903s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_news` [ RunTime:0.007575s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.005406s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsong` [ RunTime:0.005928s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsinger` [ RunTime:0.005672s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_upload` [ RunTime:0.005037s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000659s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000512s ]
+
+[ 2013-07-24T16:22:53+08:00 ] 0.0.0.0 /fifth/voice/index.php/Index/ajax_likeOrNot?songid=1
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.001749s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001772s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.006988s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.005591s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.005553s ]
+
+[ 2013-07-24T16:22:54+08:00 ] 0.0.0.0 /fifth/voice/index.php/Index/index
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.001427s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001475s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.008980s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_news` [ RunTime:0.008108s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.007193s ]
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:-0.065792s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001716s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: news_list D:\wamp\www\fifth\voice\Runtime\Cache\998860fa538fc446cb7b30694362b5c8.php 第 52 行.
+INFO: Run ParseTemplate Behavior [ RunTime:-0.067772s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.038156s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.106142s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.107834s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.109156s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.110218s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.006122s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.112940s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001500s ]
+
+[ 2013-07-24T16:27:27+08:00 ] 0.0.0.0 /fifth/voice/index.php/Index/ajax?action=getalllist
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.001807s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001718s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.007647s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.006417s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_news` [ RunTime:0.006585s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.005752s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsong` [ RunTime:0.005841s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsinger` [ RunTime:0.006281s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_upload` [ RunTime:0.059522s ]
+SQL: SELECT `id` FROM `qsc_voice_song`  [ RunTime:0.000647s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000806s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000669s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 2 ) LIMIT 1   [ RunTime:0.000609s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000561s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 3 ) LIMIT 1   [ RunTime:0.000484s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000314s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 4 ) LIMIT 1   [ RunTime:0.000357s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=2 LIMIT 1   [ RunTime:0.000372s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 5 ) LIMIT 1   [ RunTime:0.000416s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000349s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 6 ) LIMIT 1   [ RunTime:0.000420s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000660s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 7 ) LIMIT 1   [ RunTime:0.000606s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=7 LIMIT 1   [ RunTime:0.000411s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 8 ) LIMIT 1   [ RunTime:0.000415s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=8 LIMIT 1   [ RunTime:0.000298s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 9 ) LIMIT 1   [ RunTime:0.000592s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000425s ]
+
+[ 2013-07-24T16:27:27+08:00 ] 0.0.0.0 /fifth/voice/index.php/Index/ajax?action=getfavoritelist
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.004124s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001973s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.005785s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.005557s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_news` [ RunTime:0.004901s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.004795s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsong` [ RunTime:0.004561s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsinger` [ RunTime:0.006434s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_upload` [ RunTime:0.005391s ]
+
+[ 2013-07-24T16:27:27+08:00 ] 0.0.0.0 /fifth/voice/index.php/Index/ajax?action=play
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.002151s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001902s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.005124s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.006760s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_news` [ RunTime:0.007001s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.006824s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsong` [ RunTime:0.005979s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsinger` [ RunTime:0.004974s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_upload` [ RunTime:0.004944s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000550s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000412s ]
+
+[ 2013-07-24T16:27:27+08:00 ] 0.0.0.0 /fifth/voice/index.php/Index/ajax_likeOrNot?songid=1
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.001766s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001662s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.005504s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.006288s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.006592s ]
+
+[ 2013-07-24T16:27:27+08:00 ] 0.0.0.0 /fifth/voice/index.php/Index/index
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.001615s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001640s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.005032s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_news` [ RunTime:0.006651s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.005201s ]
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:-0.048329s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001166s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: news_list D:\wamp\www\fifth\voice\Runtime\Cache\998860fa538fc446cb7b30694362b5c8.php 第 52 行.
+INFO: Run ParseTemplate Behavior [ RunTime:-0.049768s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.052433s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.102489s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.103931s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.105054s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.105633s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.004648s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.107502s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001488s ]
+
+[ 2013-07-24T16:28:34+08:00 ] 0.0.0.0 /fifth/voice/index.php/Index/ajax?action=getfavoritelist
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.001855s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001717s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.009939s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.007841s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_news` [ RunTime:0.008415s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.079294s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsong` [ RunTime:0.030886s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsinger` [ RunTime:0.010153s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_upload` [ RunTime:0.032321s ]
+
+[ 2013-07-24T16:28:34+08:00 ] 0.0.0.0 /fifth/voice/index.php/Index/ajax?action=getalllist
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.001849s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001419s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.005290s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.006088s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_news` [ RunTime:0.006149s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.004985s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsong` [ RunTime:0.006278s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsinger` [ RunTime:0.005124s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_upload` [ RunTime:0.006345s ]
+SQL: SELECT `id` FROM `qsc_voice_song`  [ RunTime:0.000718s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000797s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000485s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 2 ) LIMIT 1   [ RunTime:0.000408s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000351s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 3 ) LIMIT 1   [ RunTime:0.000533s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000356s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 4 ) LIMIT 1   [ RunTime:0.000578s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=2 LIMIT 1   [ RunTime:0.000444s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 5 ) LIMIT 1   [ RunTime:0.000541s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000473s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 6 ) LIMIT 1   [ RunTime:0.001282s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000461s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 7 ) LIMIT 1   [ RunTime:0.000495s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=7 LIMIT 1   [ RunTime:0.000434s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 8 ) LIMIT 1   [ RunTime:0.001932s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=8 LIMIT 1   [ RunTime:0.000496s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 9 ) LIMIT 1   [ RunTime:0.000555s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000662s ]
+
+[ 2013-07-24T16:28:34+08:00 ] 0.0.0.0 /fifth/voice/index.php/Index/ajax?action=play
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.002024s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001766s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.005607s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.004972s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_news` [ RunTime:0.005425s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.006375s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsong` [ RunTime:0.004995s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_hotsinger` [ RunTime:0.005814s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_upload` [ RunTime:0.005858s ]
+SQL: SELECT * FROM `qsc_voice_song` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000572s ]
+SQL: SELECT `nickname` FROM `qsc_voice_guest` WHERE id=1 LIMIT 1   [ RunTime:0.000385s ]
+
+[ 2013-07-24T16:28:34+08:00 ] 0.0.0.0 /fifth/voice/index.php/Index/ajax_likeOrNot?songid=1
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.001408s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001283s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.004516s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.004547s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_favorite` [ RunTime:0.004513s ]
+
+[ 2013-07-24T16:28:34+08:00 ] 0.0.0.0 /fifth/voice/index.php/Index/index
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:-0.001479s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001666s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_guest` [ RunTime:0.004365s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_news` [ RunTime:0.004421s ]
+SQL: SHOW COLUMNS FROM `qsc_voice_song` [ RunTime:0.005619s ]
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:-0.042120s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001671s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: news_list D:\wamp\www\fifth\voice\Runtime\Cache\998860fa538fc446cb7b30694362b5c8.php 第 52 行.
+INFO: Run ParseTemplate Behavior [ RunTime:-0.044101s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.035949s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.080244s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.081657s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.083240s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.084187s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.007202s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.087827s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001725s ]
+

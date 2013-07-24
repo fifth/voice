@@ -1,3 +1,34 @@
+	//js操作cookie函数
+		function SetCookie (name, value) { 
+            var exp = new Date(); 
+            exp.setTime (exp.getTime()+3600000000); 
+            document.cookie = name + "=" + value + "; expires=" + exp.toGMTString()+"; path=/"; 
+        }
+        function getCookieVal (offset) { 
+            var endstr = document.cookie.indexOf (";", offset); 
+            if (endstr == -1) endstr = document.cookie.length; 
+            return unescape(document.cookie.substring(offset, endstr)); 
+        } 
+        function DelCookie(name) {
+            var exp = new Date();
+            exp.setTime (exp.getTime() - 1);
+            var cval = GetCookie (name);
+            document.cookie = name + "=" + cval + "; expires="+ exp.toGMTString();
+        }
+        function GetCookie(name) {
+            var arg = name + "="; 
+            var alen = arg.length; 
+            var clen = document.cookie.length; 
+            var i = 0; 
+            while (i < clen) { 
+                var j = i + alen; 
+                if (document.cookie.substring(i, j) == arg) return getCookieVal (j); 
+                i = document.cookie.indexOf(" ", i) + 1; 
+                if (i == 0) break; 
+            } 
+            return null; 
+        }
+
 //全局变量，用作储存当前播放歌曲的信息，json格式
 	var now;
 
@@ -48,7 +79,7 @@
 			slidein('playlistbox');
 			slideout('viewbox');
 			slideout('toplistbox');
-			$.get('/voice/index.php/Index/ajax?action=getalllist',function(data){
+			$.get('/fifth/voice/index.php/Index/ajax?action=getalllist',function(data){
 				data = eval("("+data+")");
 				$('#alllist').empty();
 				var htmldata = '<ul>';
@@ -66,7 +97,7 @@
 				htmldata += '</ul>';
 				$('#alllist').append(htmldata);
 			});
-			$.get('/voice/index.php/Index/ajax?action=getfavoritelist',function(data){
+			$.get('/fifth/voice/index.php/Index/ajax?action=getfavoritelist',function(data){
 				data = eval("("+data+")");
 				$('#favoritelist').empty();
 				htmldata = '<ul>';
@@ -90,24 +121,24 @@
 			});
 			$('#jquery_jplayer_1').jPlayer({
 			ready:function(){
-				$.get('/voice/index.php/Index/ajax?action=play',function(data){
+				$.get('/fifth/voice/index.php/Index/ajax?action=play',function(data){
 					now=data;
 					detail();
 					$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
-						mp3: '/voice/Upload/song/'+data.address
+						mp3: '/fifth/voice/Upload/song/'+data.address
 					}).jPlayer('play');
 				},'json');
 			},
 			ended:function(){
-				$.get('/voice/index.php/Index/ajax?action=next',function(data){
+				$.get('/fifth/voice/index.php/Index/ajax?action=next',function(data){
 					now=data;
 					detail();
 					$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
-						mp3: '/voice/Upload/song/'+data.address
+						mp3: '/fifth/voice/Upload/song/'+data.address
 					}).jPlayer('play');
 				},'json');
 			},
-			swfPath:'/voice/Tpl/Public',
+			swfPath:'/fifth/voice/Tpl/Public',
 			supplied:'mp3'
 			});
 
@@ -128,7 +159,7 @@
 			slideout('viewbox');
 			slidein('toplistbox');
 
-			$.get('/voice/index.php/Index/ajax_gettoplist',function(data){
+			$.get('/fifth/voice/index.php/Index/ajax_gettoplist',function(data){
 
 			});
 			break;
@@ -151,11 +182,11 @@
 	}
 //选择歌曲播放
 	function choose(songid) {
-		$.get('/voice/index.php/Index/ajax_choose?songid='+songid,function(data){
+		$.get('/fifth/voice/index.php/Index/ajax_choose?songid='+songid,function(data){
 			now=data;
 			detail();
 			$("#jquery_jplayer_1").jPlayer('clearMedia').jPlayer('setMedia',{
-				mp3: '/voice/Upload/song/'+data.address
+				mp3: '/fifth/voice/Upload/song/'+data.address
 			}).jPlayer('play');
 		},'json');
 	}
@@ -164,20 +195,20 @@
 	function detail(){
 		$('#detail').remove();
 		$('div.detail').append("<p id='detail'>正在播放：<br />"+now.name+"[BY]<a href='javascript:' onclick='view("+now.singerid+")'>"+now.singer+"</a><br />--------------------<br />"+now.message+"</p>");
-		$.get('/voice/index.php/Index/ajax_likeOrNot?songid='+now.id,function(data){
+		$.get('/fifth/voice/index.php/Index/ajax_likeOrNot?songid='+now.id,function(data){
 			// alert('s');
 			if (data==1) {
 				content='like_hover';
 			} else {
 				content='like'
 			}
-			$(".jp-like").css("background-image","url(/voice/Tpl/Public/pic/"+content+".png)");
+			$(".jp-like").css("background-image","url(/fifth/voice/Tpl/Public/pic/"+content+".png)");
 		},'text');
 	}
 //查看个人信息
 	function view(uid) {
 		slide('viewbox');
-		$.get('/voice/index.php/Index/ajax_view?uid='+uid,function(data){
+		$.get('/fifth/voice/index.php/Index/ajax_view?uid='+uid,function(data){
 			data=eval("("+data+")");
 			var htmldata="<div class='information'>";
 			if (data[0].manage==data[0].id) {
@@ -195,7 +226,7 @@
 			$('#signaturebox').empty();
 			$('#signaturebox').append(htmldata);
 			$('#portraitsbox').empty();
-			$('#portraitsbox').append('<div><img id="portraits" src="/voice/Upload/portraits/'+data[0].portraits+'" /></div>');
+			$('#portraitsbox').append('<div><img id="portraits" src="/fifth/voice/Upload/portraits/'+data[0].portraits+'" /></div>');
 			$('#portraitsbox').append('<input type="file" id="newimg" name="newimg" style="display:none" />');
 
 			$('#songlist').empty();
@@ -271,7 +302,7 @@
 			var target=$('#target').val();
 			var content=$('#content').val();
 			$('#result').html('');
-			$.get('/voice/index.php/Index/ajax_search?target='+target+'&content='+content,function(data){
+			$.get('/fifth/voice/index.php/Index/ajax_search?target='+target+'&content='+content,function(data){
 				for (i=0;i<data.length;i++) {
 					$('#result').append("<li>"+data[i]+"</li>");
 				};
@@ -371,49 +402,49 @@
 	//jPlayer播放器
 		// $('#jquery_jplayer_1').jPlayer({
 		// 	ready:function(){
-		// 		$.get('/voice/index.php/Index/ajax_get',function(data){
+		// 		$.get('/fifth/voice/index.php/Index/ajax_get',function(data){
 		// 			now=data;
 		// 			detail();
 		// 			$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
-		// 				mp3: '/voice/Upload/song/'+data.address
+		// 				mp3: '/fifth/voice/Upload/song/'+data.address
 		// 			}).jPlayer('play');
 		// 		},'json');
 		// 	},
 		// 	ended:function(){
-		// 		$.get('/voice/index.php/Index/ajax_get',function(data){
+		// 		$.get('/fifth/voice/index.php/Index/ajax_get',function(data){
 		// 			now=data;
 		// 			detail();
 		// 			$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
-		// 				mp3: '/voice/Upload/song/'+data.address
+		// 				mp3: '/fifth/voice/Upload/song/'+data.address
 		// 			}).jPlayer('play');
 		// 		},'json');
 		// 	},
-		// 	swfPath:'/voice/Tpl/Public',
+		// 	swfPath:'/fifth/voice/Tpl/Public',
 		// 	supplied:'mp3'
 		// });
 	//下一首
-		$('.jp-next').click(function(){
-			$.get('/voice/index.php/Index/ajax?action=next',function(data){
-				now=data;
-				detail();
-				$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
-					mp3 :'/voice/Upload/song/'+now.address
-				}).jPlayer('play');
-			},'json')
-		});
-		$('.jp-previous').click(function(){
-			//alert('d');
-			$.get('/voice/index.php/Index/ajax?action=previous',function(data){
-				now=data;
-				detail();
-				$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
-					mp3 :'/voice/Upload/song/'+now.address
-				}).jPlayer('play');
-			},'json')
-		});
+		// $('.jp-next').click(function(){
+		// 	$.get('/fifth/voice/index.php/Index/ajax?action=next',function(data){
+		// 		now=data;
+		// 		detail();
+		// 		$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
+		// 			mp3 :'/fifth/voice/Upload/song/'+now.address
+		// 		}).jPlayer('play');
+		// 	},'json')
+		// });
+		// $('.jp-previous').click(function(){
+		// 	//alert('d');
+		// 	$.get('/fifth/voice/index.php/Index/ajax?action=previous',function(data){
+		// 		now=data;
+		// 		detail();
+		// 		$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
+		// 			mp3 :'/fifth/voice/Upload/song/'+now.address
+		// 		}).jPlayer('play');
+		// 	},'json')
+		// });
 	//切换播放模式
 		$('#mode').click(function(){
-			$.get('/voice/index.php/Index/ajax_changemode',function(data){
+			$.get('/fifth/voice/index.php/Index/ajax_changemode',function(data){
 				$('#mode').val('mode:'+data);
 			},'text');
 		});
@@ -425,10 +456,10 @@
 			} else if (action=='random') {
 				action='order';
 			}
-			$.get('/voice/index.php/Index/ajax_changeList?action='+action,function(data){
+			$.get('/fifth/voice/index.php/Index/ajax_changeList?action='+action,function(data){
 					$('#nowlist').html('');
 					for (i=0;i<data.length;i++) {
-						$('#nowlist').append("<li><a href='' onclick='choose("+data[i].id+");return false'>"+data[i].name+"</a>[BY]<a href='/voice/index.php/Index/view?guestid="+data[i].singerid+"'>"+data[i].singer+"</li>");
+						$('#nowlist').append("<li><a href='' onclick='choose("+data[i].id+");return false'>"+data[i].name+"</a>[BY]<a href='/fifth/voice/index.php/Index/view?guestid="+data[i].singerid+"'>"+data[i].singer+"</li>");
 					}
 				},'json');
 			$('#order').val(action);
@@ -441,13 +472,13 @@
 		// 	} else {
 		// 		action=0;
 		// 	}
-		// 	$.get('/voice/index.php/Index/ajax_like?action='+action,function(data){
+		// 	$.get('/fifth/voice/index.php/Index/ajax_like?action='+action,function(data){
 		// 		if (data) {
-		// 			$(".jp-like").css("background-image","url(/voice/Tpl/Public/pic/like_hover.png)");
+		// 			$(".jp-like").css("background-image","url(/fifth/voice/Tpl/Public/pic/like_hover.png)");
 		// 		} else if (!action) {
-		// 			$(".jp-like").css("background-image","url(/voice/Tpl/Public/pic/like.png)");
+		// 			$(".jp-like").css("background-image","url(/fifth/voice/Tpl/Public/pic/like.png)");
 		// 		}
-		// 		$.get('/voice/index.php/Index/ajax?action=getfavoritelist',function(data){
+		// 		$.get('/fifth/voice/index.php/Index/ajax?action=getfavoritelist',function(data){
 		// 			data = eval("("+data+")");
 		// 			$('#favoritelist').empty();
 		// 			htmldata = '<ul>';
@@ -474,16 +505,45 @@
 	})
 
 /*****************************************************/
-
+function random_click(){
+	random=GetCookie('random');
+	DelCookie('random');
+	SetCookie('random', 1-random);
+}
+function circle_click(){
+	circle=GetCookie('circle');
+	DelCookie('circle');
+	SetCookie('circle', 1-circle);
+}
+function next_click(){
+	$.get('/fifth/voice/index.php/Index/ajax?action=next',function(data){
+		if (data==null) listen_reset();
+		now=data;
+		detail();
+		$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
+			mp3 :'/fifth/voice/Upload/song/'+now.address
+		}).jPlayer('play');
+	},'json');
+}
+function previous_click(){
+	$.get('/fifth/voice/index.php/Index/ajax?action=previous',function(data){
+		if (data==null) listen_reset();
+		now=data;
+		detail();
+		$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
+			mp3 :'/fifth/voice/Upload/song/'+now.address
+		}).jPlayer('play');
+	},'json');
+}
 function like_hover(){
-	$(".jp-like").css("background-image","url(/voice/Tpl/Public/pic/like_hover.png)");
+	$(".jp-like").css("background-image","url(/fifth/voice/Tpl/Public/pic/like_hover.png)");
 }
 function like_default(){
-	$.get('/voice/index.php/Index/ajax_likeOrNot?songid='+now.id,function(data){
+	$.get('/fifth/voice/index.php/Index/ajax_likeOrNot?songid='+now.id,function(data){
 		if (data==1) {
-			$(".jp-like").css("background-image","url(/voice/Tpl/Public/pic/like_hover.png)");
+			$(".jp-like").css("background-image","url(/fifth/voice/Tpl/Public/pic/like_hover.png)");
 		} else {
-			$(".jp-like").css("background-image","url(/voice/Tpl/Public/pic/like.png)");
+			$(".jp-like").css("background-image","url(/fifth/voice/Tpl/Public/pic/like.png)");
 		}
 	},'text');
 }
@@ -494,13 +554,13 @@ function like_click(){
 			} else {
 				action=0;
 			}
-			$.get('/voice/index.php/Index/ajax_like?action='+action,function(data){
+			$.get('/fifth/voice/index.php/Index/ajax_like?action='+action,function(data){
 				if (data) {
-					$(".jp-like").css("background-image","url(/voice/Tpl/Public/pic/like_hover.png)");
+					$(".jp-like").css("background-image","url(/fifth/voice/Tpl/Public/pic/like_hover.png)");
 				} else if (!action) {
-					$(".jp-like").css("background-image","url(/voice/Tpl/Public/pic/like.png)");
+					$(".jp-like").css("background-image","url(/fifth/voice/Tpl/Public/pic/like.png)");
 				}
-				$.get('/voice/index.php/Index/ajax?action=getfavoritelist',function(data){
+				$.get('/fifth/voice/index.php/Index/ajax?action=getfavoritelist',function(data){
 					data = eval("("+data+")");
 					$('#favoritelist').empty();
 					htmldata = '<ul>';
