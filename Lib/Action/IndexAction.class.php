@@ -107,7 +107,7 @@ class IndexAction extends Action{
                 setcookie('list',json_encode($song_id_list));
                 setcookie('nowplaying',0);
                 setcookie('random',0);
-                setcookie('circle',0);
+                setcookie('circle',1);
                 echo json_encode($song_list);
                 break;
             case 'getfavoritelist'://获取已收藏的歌曲，返回json格式的数组，若未登录则返回0

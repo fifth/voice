@@ -199,8 +199,10 @@
 			// alert('s');
 			if (data==1) {
 				content='like_hover';
+				now.like=1;
 			} else {
-				content='like'
+				content='like';
+				now.like=0;
 			}
 			$(".jp-like").css("background-image","url(/fifth/voice/Tpl/Public/pic/"+content+".png)");
 		},'text');
@@ -509,11 +511,41 @@ function random_click(){
 	random=GetCookie('random');
 	DelCookie('random');
 	SetCookie('random', 1-random);
+	if (random==0) {
+		$(".jp-random").css("background-image","url(/fifth/voice/Tpl/Public/pic/random_hover.png)");
+	} else {
+		$(".jp-random").css("background-image","url(/fifth/voice/Tpl/Public/pic/random.png)");
+	}
+}
+function random_hover(){
+	$(".jp-random").css("background-image","url(/fifth/voice/Tpl/Public/pic/random_hover.png)");
+}
+function random_default(){
+	if (GetCookie('random')==1) {
+		$(".jp-random").css("background-image","url(/fifth/voice/Tpl/Public/pic/random_hover.png)");
+	} else {
+		$(".jp-random").css("background-image","url(/fifth/voice/Tpl/Public/pic/random.png)");
+	}
 }
 function circle_click(){
 	circle=GetCookie('circle');
 	DelCookie('circle');
 	SetCookie('circle', 1-circle);
+	if (circle==0) {
+		$(".jp-circle").css("background-image","url(/fifth/voice/Tpl/Public/pic/circle_hover.png)");
+	} else {
+		$(".jp-circle").css("background-image","url(/fifth/voice/Tpl/Public/pic/circle.png)");
+	}
+}
+function circle_hover(){
+	$(".jp-circle").css("background-image","url(/fifth/voice/Tpl/Public/pic/circle_hover.png)");
+}
+function circle_default(){
+	if (GetCookie('circle')==1) {
+		$(".jp-circle").css("background-image","url(/fifth/voice/Tpl/Public/pic/circle_hover.png)");
+	} else {
+		$(".jp-circle").css("background-image","url(/fifth/voice/Tpl/Public/pic/circle.png)");
+	}
 }
 function next_click(){
 	$.get('/fifth/voice/index.php/Index/ajax?action=next',function(data){
@@ -539,48 +571,54 @@ function like_hover(){
 	$(".jp-like").css("background-image","url(/fifth/voice/Tpl/Public/pic/like_hover.png)");
 }
 function like_default(){
-	$.get('/fifth/voice/index.php/Index/ajax_likeOrNot?songid='+now.id,function(data){
-		if (data==1) {
+	if (now.like==1) {
 			$(".jp-like").css("background-image","url(/fifth/voice/Tpl/Public/pic/like_hover.png)");
-		} else {
+	} else if (now.like==0) {
 			$(".jp-like").css("background-image","url(/fifth/voice/Tpl/Public/pic/like.png)");
-		}
-	},'text');
+	}
+	// $.get('/fifth/voice/index.php/Index/ajax_likeOrNot?songid='+now.id,function(data){
+	// 	if (data==1) {
+	// 		$(".jp-like").css("background-image","url(/fifth/voice/Tpl/Public/pic/like_hover.png)");
+	// 	} else {
+	// 		$(".jp-like").css("background-image","url(/fifth/voice/Tpl/Public/pic/like.png)");
+	// 	}
+	// },'text');
 }
 function like_click(){
 	var action=$('.jp-like').css("background-image");
-			if (action.match("like_hover")) {
-				action=1;
+	if (action.match("like_hover")) {
+		action=1;
+	} else {
+		action=0;
+	}
+	$.get('/fifth/voice/index.php/Index/ajax_like?action='+action,function(data){
+		if (data) {
+			$(".jp-like").css("background-image","url(/fifth/voice/Tpl/Public/pic/like_hover.png)");
+		} else if (!action) {
+			$(".jp-like").css("background-image","url(/fifth/voice/Tpl/Public/pic/like.png)");
+		}
+		$.get('/fifth/voice/index.php/Index/ajax?action=getfavoritelist',function(data){
+			data = eval("("+data+")");
+			$('#favoritelist').empty();
+			htmldata = '<ul>';
+			if (data!=0) {
+				for (var i = 0; i < data.length; i++) {
+					htmldata += "<li><a href='javascript:' onclick='choose(";
+					htmldata += data[i].id;
+					htmldata += ")'>";
+					htmldata += data[i].name;
+					htmldata += "</a>[BY]<a href='javascript:' onclick='view(";
+					htmldata += data[i].singerid;
+					htmldata += ")'>";
+					htmldata += data[i].singer;
+					htmldata += "</a></li>";
+				};
 			} else {
-				action=0;
+				htmldata += 'not login';
 			}
-			$.get('/fifth/voice/index.php/Index/ajax_like?action='+action,function(data){
-				if (data) {
-					$(".jp-like").css("background-image","url(/fifth/voice/Tpl/Public/pic/like_hover.png)");
-				} else if (!action) {
-					$(".jp-like").css("background-image","url(/fifth/voice/Tpl/Public/pic/like.png)");
-				}
-				$.get('/fifth/voice/index.php/Index/ajax?action=getfavoritelist',function(data){
-					data = eval("("+data+")");
-					$('#favoritelist').empty();
-					htmldata = '<ul>';
-					if (data!=0) {
-						for (var i = 0; i < data.length; i++) {
-							htmldata += "<li><a href='javascript:' onclick='choose(";
-							htmldata += data[i].id;
-							htmldata += ")'>";
-							htmldata += data[i].name;
-							htmldata += "</a>[BY]<a href='javascript:' onclick='view(";
-							htmldata += data[i].singerid;
-							htmldata += ")'>";
-							htmldata += data[i].singer;
-							htmldata += "</a></li>";
-						};
-					} else {
-						htmldata += 'not login';
-					}
-					htmldata += '</ul>';
-					$('#favoritelist').append(htmldata);
-			});
-			},'json');
+			htmldata += '</ul>';
+			$('#favoritelist').append(htmldata);
+	});
+	},'json');
+	detail();
 }

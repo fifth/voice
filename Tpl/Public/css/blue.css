@@ -154,6 +154,7 @@ a.jp-play,
 a.jp-pause {
 	width:40px;
 	height:40px;
+	border-radius: 20px;
 	position: relative;
 }
 
@@ -161,24 +162,27 @@ a.jp-play {
 	background-image: url(../pic/play.png);
 	height: 80px;
 	width: 80px;
+	border-radius: 40px;
 }
 a.jp-play:hover {
-	background-image: url(../pic/play_hover.png);
+	background-color: #D7D7D5;
 }
 a.jp-pause {
 	background-image: url(../pic/pause.png);
 	height: 80px;
 	width: 80px;
+	border-radius: 40px;
 	display: none;
 }
 a.jp-pause:hover {
-	background-image: url(../pic/pause_hover.png);
+	background-color: #D7D7D5;
 }
 
 a.jp-stop, a.jp-previous, a.jp-next, a.jp-like {
 	width:40px;
 	height:40px;
 	margin-left:10px;
+	border-radius: 20px;
 	position: relative;
 	top: 40px;
 }
@@ -197,21 +201,21 @@ a.jp-stop {
 }
 
 a.jp-stop:hover {
-	background-image: url(../pic/stop_hover.png);
+	background-color: #D7D7D5;
 }
 
 a.jp-previous {
 	background-image: url(../pic/previous.png);
 }
 a.jp-previous:hover {
-	background-image: url(../pic/previous_hover.png);
+	background-color: #D7D7D5;
 }
 
 a.jp-next {
 	background-image: url(../pic/next.png);
 }
 a.jp-next:hover {
-	background-image: url(../pic/next_hover.png);
+	background-color: #D7D7D5;
 }
 
 a.jp-like {
@@ -223,16 +227,16 @@ a.jp-like {
 a.jp-random{
 	background-image: url(../pic/random.png);
 }
-a.jp-random:hover{
-	background-image: url(../pic/random_hover.png);
-}
+/*a.jp-random:hover{
+	background-image: url(../pic/random.png);
+}*/
 a.jp-circle{
 	left: 65px;
 	background-image: url(../pic/circle.png);
 }
-a.jp-circle:hover{
+/*a.jp-circle:hover{
 	background-image: url(../pic/circle_hover.png);
-}
+}*/
 
 /* @end */
 
@@ -294,7 +298,7 @@ a.jp-volume-max {
 	width:25px;
 	height:25px;
 	position: absolute;
-	top: 110px;
+	top: 111px;
 	left: 280px;
 }
 
