@@ -165,7 +165,7 @@ a.jp-play {
 	border-radius: 40px;
 }
 a.jp-play:hover {
-	background-color: #D7D7D5;
+	background-color: #EAEAE9;
 }
 a.jp-pause {
 	background-image: url(../pic/pause.png);
@@ -175,7 +175,7 @@ a.jp-pause {
 	display: none;
 }
 a.jp-pause:hover {
-	background-color: #D7D7D5;
+	background-color: #EAEAE9;
 }
 
 a.jp-stop, a.jp-previous, a.jp-next, a.jp-like {
@@ -201,21 +201,21 @@ a.jp-stop {
 }
 
 a.jp-stop:hover {
-	background-color: #D7D7D5;
+	background-color: #EAEAE9;
 }
 
 a.jp-previous {
 	background-image: url(../pic/previous.png);
 }
 a.jp-previous:hover {
-	background-color: #D7D7D5;
+	background-color: #EAEAE9;
 }
 
 a.jp-next {
 	background-image: url(../pic/next.png);
 }
 a.jp-next:hover {
-	background-color: #D7D7D5;
+	background-color: #EAEAE9;
 }
 
 a.jp-like {
