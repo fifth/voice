@@ -221,9 +221,10 @@ a.jp-next:hover {
 a.jp-like {
 	background-image: url(../pic/like.png);
 }
-/*a.jp-like:hover {
-	background-image: url(../pic/like_hover.png);
-}*/
+a.jp-like:hover {
+	/*background-image: url(../pic/like_hover.png);*/
+	background-color: #EAEAE9;
+}
 a.jp-random{
 	background-image: url(../pic/random.png);
 }

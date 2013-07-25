@@ -1,92 +1,111 @@
-	//js操作cookie函数
-		function SetCookie (name, value) { 
-            var exp = new Date(); 
-            exp.setTime (exp.getTime()+3600000000); 
-            document.cookie = name + "=" + value + "; expires=" + exp.toGMTString()+"; path=/"; 
-        }
-        function getCookieVal (offset) { 
-            var endstr = document.cookie.indexOf (";", offset); 
-            if (endstr == -1) endstr = document.cookie.length; 
-            return unescape(document.cookie.substring(offset, endstr)); 
-        } 
-        function DelCookie(name) {
-            var exp = new Date();
-            exp.setTime (exp.getTime() - 1);
-            var cval = GetCookie (name);
-            document.cookie = name + "=" + cval + "; expires="+ exp.toGMTString();
-        }
-        function GetCookie(name) {
-            var arg = name + "="; 
-            var alen = arg.length; 
-            var clen = document.cookie.length; 
-            var i = 0; 
-            while (i < clen) { 
-                var j = i + alen; 
-                if (document.cookie.substring(i, j) == arg) return getCookieVal (j); 
-                i = document.cookie.indexOf(" ", i) + 1; 
-                if (i == 0) break; 
-            } 
-            return null; 
-        }
+//js操作cookie函数
+function SetCookie (name, value) { 
+    var exp = new Date(); 
+    exp.setTime (exp.getTime()+3600000000); 
+    document.cookie = name + "=" + value + "; expires=" + exp.toGMTString()+"; path=/"; 
+}
+function getCookieVal (offset) { 
+    var endstr = document.cookie.indexOf (";", offset); 
+    if (endstr == -1) endstr = document.cookie.length; 
+    return unescape(document.cookie.substring(offset, endstr)); 
+} 
+function DelCookie(name) {
+    var exp = new Date();
+    exp.setTime (exp.getTime() - 1);
+    var cval = GetCookie (name);
+    document.cookie = name + "=" + cval + "; expires="+ exp.toGMTString();
+}
+function GetCookie(name) {
+    var arg = name + "="; 
+    var alen = arg.length; 
+    var clen = document.cookie.length; 
+    var i = 0; 
+    while (i < clen) { 
+        var j = i + alen; 
+        if (document.cookie.substring(i, j) == arg) return getCookieVal (j); 
+        i = document.cookie.indexOf(" ", i) + 1; 
+        if (i == 0) break; 
+    } 
+    return null; 
+}
 
 //全局变量，用作储存当前播放歌曲的信息，json格式
 	var now;
 
-	function slidein(boxname) {
-		$('#'+boxname).css('display','block');
-		if (boxname=='mainbox') {
-			$('#'+boxname).animate({
-				left: '60px',
-			})
-		} else {
-			$('#'+boxname).animate({
-				right: '60px',
-			});
-		}
-	}
-
-	function slideout(boxname) {
+function slidein(boxname) {
+	$('#'+boxname).css('display','block');
+	if (boxname=='mainbox') {
 		$('#'+boxname).animate({
-			right: '-705px',
-		},function(){
-			$('#'+boxname).css('display','none');
+			left: '60px',
+		})
+	} else {
+		$('#'+boxname).animate({
+			right: '60px',
 		});
 	}
+}
 
-	function slide(boxname) {
-		switch (boxname) {
-		case 'searchbox':
-			slidein('searchbox');
-			slideout('uploadbox');
-			slidein('playerbox');
-			slideout('playlistbox');
-			slideout('viewbox');
-			slideout('toplistbox');
-			break;
-		case 'uploadbox':
-			slideout('searchbox');
-			slidein('uploadbox');
-			slideout('playerbox');
-			listen_reset();
-			slideout('playlistbox');
-			//slideout('viewbox');
-			slideout('toplistbox');
-			break;
-		case 'playerbox':
-			slideout('searchbox');
-			slideout('uploadbox');
-			slidein('playerbox');
-			slidein('playlistbox');
-			slideout('viewbox');
-			slideout('toplistbox');
-			$.get('/fifth/voice/index.php/Index/ajax?action=getalllist',function(data){
-				data = eval("("+data+")");
-				$('#alllist').empty();
-				var htmldata = '<ul>';
+function slideout(boxname) {
+	$('#'+boxname).animate({
+		right: '-705px',
+	},function(){
+		$('#'+boxname).css('display','none');
+	});
+}
+
+function slide(boxname) {
+	switch (boxname) {
+	case 'searchbox':
+		slidein('searchbox');
+		slideout('uploadbox');
+		slidein('playerbox');
+		slideout('playlistbox');
+		slideout('viewbox');
+		slideout('toplistbox');
+		break;
+	case 'uploadbox':
+		slideout('searchbox');
+		slidein('uploadbox');
+		slideout('playerbox');
+		listen_reset();
+		slideout('playlistbox');
+		//slideout('viewbox');
+		slideout('toplistbox');
+		break;
+	case 'playerbox':
+		slideout('searchbox');
+		slideout('uploadbox');
+		slidein('playerbox');
+		slidein('playlistbox');
+		slideout('viewbox');
+		slideout('toplistbox');
+		$.get('/fifth/voice/index.php/Index/ajax?action=getalllist',function(data){
+			data = eval("("+data+")");
+			$('#alllist').empty();
+			var htmldata = '<ul>';
+			for (var i = 0; i < data.length; i++) {
+				htmldata += "<li><a href='javascript:' onclick='choose(";
+				htmldata += data[i].id;
+				htmldata += ",0)'>";
+				htmldata += data[i].name;
+				htmldata += "</a>[BY]<a href='javascript:' onclick='view(";
+				htmldata += data[i].singerid;
+				htmldata += ")'>";
+				htmldata += data[i].singer;
+				htmldata += "</a></li>";
+			};
+			htmldata += '</ul>';
+			$('#alllist').append(htmldata);
+		});
+		$.get('/fifth/voice/index.php/Index/ajax?action=getfavoritelist',function(data){
+			data = eval("("+data+")");
+			$('#favoritelist').empty();
+			htmldata = '<ul>';
+			if (data!=0) {
 				for (var i = 0; i < data.length; i++) {
 					htmldata += "<li><a href='javascript:' onclick='choose(";
 					htmldata += data[i].id;
-					htmldata += ")'>";
+					htmldata += ",1)'>";
 					htmldata += data[i].name;
 					htmldata += "</a>[BY]<a href='javascript:' onclick='view(";
 					htmldata += data[i].singerid;
@@ -94,119 +113,100 @@
 					htmldata += data[i].singer;
 					htmldata += "</a></li>";
 				};
-				htmldata += '</ul>';
-				$('#alllist').append(htmldata);
-			});
-			$.get('/fifth/voice/index.php/Index/ajax?action=getfavoritelist',function(data){
-				data = eval("("+data+")");
-				$('#favoritelist').empty();
-				htmldata = '<ul>';
-				if (data!=0) {
-					for (var i = 0; i < data.length; i++) {
-						htmldata += "<li><a href='javascript:' onclick='choose(";
-						htmldata += data[i].id;
-						htmldata += ")'>";
-						htmldata += data[i].name;
-						htmldata += "</a>[BY]<a href='javascript:' onclick='view(";
-						htmldata += data[i].singerid;
-						htmldata += ")'>";
-						htmldata += data[i].singer;
-						htmldata += "</a></li>";
-					};
-				} else {
-					htmldata += 'not login';
-				}
-				htmldata += '</ul>';
-				$('#favoritelist').append(htmldata);
-			});
-			$('#jquery_jplayer_1').jPlayer({
-			ready:function(){
-				$.get('/fifth/voice/index.php/Index/ajax?action=play',function(data){
-					now=data;
-					detail();
-					$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
-						mp3: '/fifth/voice/Upload/song/'+data.address
-					}).jPlayer('play');
-				},'json');
-			},
-			ended:function(){
-				$.get('/fifth/voice/index.php/Index/ajax?action=next',function(data){
-					now=data;
-					detail();
-					$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
-						mp3: '/fifth/voice/Upload/song/'+data.address
-					}).jPlayer('play');
-				},'json');
-			},
-			swfPath:'/fifth/voice/Tpl/Public',
-			supplied:'mp3'
-			});
-
-			break;
-		case 'viewbox':
-			slideout('searchbox');
-			slidein('playerbox');
-			slideout('uploadbox');
-			slideout('playlistbox');
-			slidein('viewbox');
-			slideout('toplistbox');
-			break;
-		case 'toplistbox':
-			slideout('searchbox');
-			slideout('uploadbox');
-			slidein('playerbox');
-			slideout('playlistbox');
-			slideout('viewbox');
-			slidein('toplistbox');
-
+			} else {
+				htmldata += 'not login';
+			}
+			htmldata += '</ul>';
+			$('#favoritelist').append(htmldata);
+		});
+		$('#jquery_jplayer_1').jPlayer({
+		ready:function(){
+			$.get('/fifth/voice/index.php/Index/ajax?action=play',function(data){
+				now=data;
+				detail();
+				$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
+					mp3: '/fifth/voice/Upload/song/'+data.address
+				}).jPlayer('play');
+			},'json');
+		},
+		ended:function(){
+			$.get('/fifth/voice/index.php/Index/ajax?action=next',function(data){
+				now=data;
+				detail();
+				$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
+					mp3: '/fifth/voice/Upload/song/'+data.address
+				}).jPlayer('play');
+			},'json');
+		},
+		swfPath:'/fifth/voice/Tpl/Public',
+		supplied:'mp3'
+		});
+		// alert('s');
+		break;
+	case 'viewbox':
+		slideout('searchbox');
+		slidein('playerbox');
+		slideout('uploadbox');
+		slideout('playlistbox');
+		slidein('viewbox');
+		slideout('toplistbox');
+		break;
+	case 'toplistbox':
+		slideout('searchbox');
+		slideout('uploadbox');
+		slidein('playerbox');
+		slideout('playlistbox');
+		slideout('viewbox');
+		slidein('toplistbox');
 			$.get('/fifth/voice/index.php/Index/ajax_gettoplist',function(data){
-
 			});
-			break;
-		default:
-			slideout('searchbox');
-			slideout('uploadbox');
-			slideout('playerbox');
-			slideout('playlistbox');
-			slideout('viewbox');
-			slideout('toplistbox');
-			listen_reset();
-			break;
-		}
+		break;
+	default:
+		slideout('searchbox');
+		slideout('uploadbox');
+		slideout('playerbox');
+		slideout('playlistbox');
+		slideout('viewbox');
+		slideout('toplistbox');
+		listen_reset();
+		break;
 	}
+	circle_default();
+	random_default();
+}
 
-	function listen_reset() {
-		$('#jquery_jplayer_1').jPlayer('clearMedia');
-	}
-	function listen_start() {
-	}
+function listen_reset() {
+	$('#jquery_jplayer_1').jPlayer('clearMedia');
+}
+function listen_start() {
+}
 //选择歌曲播放
-	function choose(songid) {
-		$.get('/fifth/voice/index.php/Index/ajax_choose?songid='+songid,function(data){
-			now=data;
-			detail();
-			$("#jquery_jplayer_1").jPlayer('clearMedia').jPlayer('setMedia',{
-				mp3: '/fifth/voice/Upload/song/'+data.address
-			}).jPlayer('play');
-		},'json');
-	}
+function choose(songid,list) {
+	$.get('/fifth/voice/index.php/Index/ajax?action=choose&songid='+songid+'&list='+list,function(data){
+		now=data;
+		detail();
+		$("#jquery_jplayer_1").jPlayer('clearMedia').jPlayer('setMedia',{
+			mp3: '/fifth/voice/Upload/song/'+data.address
+		}).jPlayer('play');
+	},'json');
+}
 
 //显示当前播放歌曲的信息
-	function detail(){
-		$('#detail').remove();
-		$('div.detail').append("<p id='detail'>正在播放：<br />"+now.name+"[BY]<a href='javascript:' onclick='view("+now.singerid+")'>"+now.singer+"</a><br />--------------------<br />"+now.message+"</p>");
-		$.get('/fifth/voice/index.php/Index/ajax_likeOrNot?songid='+now.id,function(data){
-			// alert('s');
-			if (data==1) {
-				content='like_hover';
-				now.like=1;
-			} else {
-				content='like';
-				now.like=0;
-			}
-			$(".jp-like").css("background-image","url(/fifth/voice/Tpl/Public/pic/"+content+".png)");
-		},'text');
-	}
+function detail(){
+	$('#detail').remove();
+	$('div.detail').append("<p id='detail'>正在播放：<br />"+now.name+"[BY]<a href='javascript:' onclick='view("+now.singerid+")'>"+now.singer+"</a><br />--------------------<br />"+now.message+"</p>");
+	$.get('/fifth/voice/index.php/Index/ajax_likeOrNot?songid='+now.id,function(data){
+		// alert('s');
+		if (data==1) {
+			content='like_hover';
+			now.like=1;
+		} else {
+			content='like';
+			now.like=0;
+		}
+		$(".jp-like").css("background-image","url(/fifth/voice/Tpl/Public/pic/"+content+".png)");
+	},'text');
+}
 //查看个人信息
 	function view(uid) {
 		slide('viewbox');
@@ -237,7 +237,7 @@
 					for (var i = 0; i < data[1].length; i++) {
 						htmldata += "<li><a href='javascript:' onclick='choose(";
 						htmldata += data[1][i].id;
-						htmldata += ")'>";
+						htmldata += ",1)'>";
 						htmldata += data[1][i].name;
 						htmldata += "</a>[BY]<a href='javascript:' onclick='view(";
 						htmldata += data[1][i].singerid;
@@ -400,7 +400,7 @@
 
 //此js文件用于播放相关功能配置，包括播放器功能键以及播放控制按钮及收藏/取消收藏功能
 //播放控制
-	$(document).ready(function(){
+	// $(document).ready(function(){
 	//jPlayer播放器
 		// $('#jquery_jplayer_1').jPlayer({
 		// 	ready:function(){
@@ -445,27 +445,27 @@
 		// 	},'json')
 		// });
 	//切换播放模式
-		$('#mode').click(function(){
-			$.get('/fifth/voice/index.php/Index/ajax_changemode',function(data){
-				$('#mode').val('mode:'+data);
-			},'text');
-		});
+		// $('#mode').click(function(){
+		// 	$.get('/fifth/voice/index.php/Index/ajax_changemode',function(data){
+		// 		$('#mode').val('mode:'+data);
+		// 	},'text');
+		// });
 	//切换播放列表
-		$('#order').click(function(){
-			var action=$('#order').val();
-			if (action=='order') {
-				action='random';
-			} else if (action=='random') {
-				action='order';
-			}
-			$.get('/fifth/voice/index.php/Index/ajax_changeList?action='+action,function(data){
-					$('#nowlist').html('');
-					for (i=0;i<data.length;i++) {
-						$('#nowlist').append("<li><a href='' onclick='choose("+data[i].id+");return false'>"+data[i].name+"</a>[BY]<a href='/fifth/voice/index.php/Index/view?guestid="+data[i].singerid+"'>"+data[i].singer+"</li>");
-					}
-				},'json');
-			$('#order').val(action);
-		});
+		// $('#order').click(function(){
+		// 	var action=$('#order').val();
+		// 	if (action=='order') {
+		// 		action='random';
+		// 	} else if (action=='random') {
+		// 		action='order';
+		// 	}
+		// 	$.get('/fifth/voice/index.php/Index/ajax_changeList?action='+action,function(data){
+		// 			$('#nowlist').html('');
+		// 			for (i=0;i<data.length;i++) {
+		// 				$('#nowlist').append("<li><a href='' onclick='choose("+data[i].id+");return false'>"+data[i].name+"</a>[BY]<a href='/fifth/voice/index.php/Index/view?guestid="+data[i].singerid+"'>"+data[i].singer+"</li>");
+		// 			}
+		// 		},'json');
+		// 	$('#order').val(action);
+		// });
 	//收藏/取消收藏
 		// $('.jp-like').click(function(){
 		// 	var action=$('.jp-like').css("background-image");
@@ -504,7 +504,7 @@
 		// 	});
 		// 	},'json');
 		// });
-	})
+	// })
 
 /*****************************************************/
 function random_click(){
@@ -576,13 +576,6 @@ function like_default(){
 	} else if (now.like==0) {
 			$(".jp-like").css("background-image","url(/fifth/voice/Tpl/Public/pic/like.png)");
 	}
-	// $.get('/fifth/voice/index.php/Index/ajax_likeOrNot?songid='+now.id,function(data){
-	// 	if (data==1) {
-	// 		$(".jp-like").css("background-image","url(/fifth/voice/Tpl/Public/pic/like_hover.png)");
-	// 	} else {
-	// 		$(".jp-like").css("background-image","url(/fifth/voice/Tpl/Public/pic/like.png)");
-	// 	}
-	// },'text');
 }
 function like_click(){
 	var action=$('.jp-like').css("background-image");
@@ -605,7 +598,7 @@ function like_click(){
 				for (var i = 0; i < data.length; i++) {
 					htmldata += "<li><a href='javascript:' onclick='choose(";
 					htmldata += data[i].id;
-					htmldata += ")'>";
+					htmldata += ",1)'>";
 					htmldata += data[i].name;
 					htmldata += "</a>[BY]<a href='javascript:' onclick='view(";
 					htmldata += data[i].singerid;

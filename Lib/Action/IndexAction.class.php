@@ -94,6 +94,7 @@ class IndexAction extends Action{
         $hotsinger=M('hotsinger');
         $upload=M('upload');
         $action=$this->_param('action');
+        $a=$this->check_session();
         switch ($action) {
             case 'getalllist'://获取所有歌曲列表，返回json格式的数组
                 $song_id_list=$song->getField('id',true);
@@ -106,22 +107,25 @@ class IndexAction extends Action{
                 unset($search);
                 setcookie('list',json_encode($song_id_list));
                 setcookie('nowplaying',0);
-                setcookie('random',0);
-                setcookie('circle',1);
+                if (!isset($_COOKIE['random'])) {
+                    setcookie('random',0);
+                }
+                if (!isset($_COOKIE['circle'])) {
+                    setcookie('circle',1);
+                }
                 echo json_encode($song_list);
                 break;
             case 'getfavoritelist'://获取已收藏的歌曲，返回json格式的数组，若未登录则返回0
                 //验证是否登陆
-                $a=$this->check_session();
                 if ($a!=0) {
 
-                    $guest=M('guest');
-                    $song=M('song');
-                    $news=M('news');
-                    $favorite=M('favorite');
-                    $hotsong=M('hotsong');
-                    $hotsinger=M('hotsinger');
-                    $upload=M('upload');
+                    // $guest=M('guest');
+                    // $song=M('song');
+                    // $news=M('news');
+                    // $favorite=M('favorite');
+                    // $hotsong=M('hotsong');
+                    // $hotsinger=M('hotsinger');
+                    // $upload=M('upload');
 
                     $search['stuid']=$a['stuid'];
                     $guestinfo=$guest->where($search)->find();
@@ -219,8 +223,39 @@ class IndexAction extends Action{
                 setcookie('nowplaying',$nowplaying);
                 echo json_encode($re);
                 break;
-            case 'like':
+            case 'choose'://ajax动作，用作选择歌曲播放,list为0表示全部列表，1表示收藏列表
+                $songid=$this->_param('songid');
+                $list=$this->_param('list');
+                if (!isset($_COOKIE['list'])) {
+                    $search['id']=$songid;
+                    echo json_encode($song->where($search)->find());
+                    die();
+                }
+                // $song_id_list=json_decode($this->cookie2json($_COOKIE['list']),true);
                 
+                $a=$this->check_session();
+                if (($list==1)&&($a!=0)) {
+                    $search['stuid']=$a['stuid'];
+                    $guestinfo=$guest->where($search)->find();
+                    unset($search);
+                    $search['guestid']=$guestinfo['id'];
+                    $song_id_list=$favorite->where($search)->getField('songid',true);
+                    unset($search);
+                } else {
+                    $song_id_list=$song->getField('id',true);
+                }
+                setcookie('list',json_encode($song_id_list));
+                $id=$list==1?'songid':'id';
+                foreach ($song_id_list as $key => $value) {
+                    if ($value[$id]==$songid) {
+                        setcookie('nowplaying',$key);
+                        $search['id']=$songid;
+                        $re=$song->where($search)->find();
+                        $re['singer']=$guest->where('id='.$re['singerid'])->getField('nickname');
+                        echo json_encode($re);
+                        die();
+                    }
+                }
                 break;
             default:
                 
