@@ -105,7 +105,9 @@ function slide(boxname) {
 				for (var i = 0; i < data.length; i++) {
 					htmldata += "<li><a href='javascript:' onclick='choose(";
 					htmldata += data[i].id;
-					htmldata += ",1)'>";
+					htmldata += ",";
+					htmldata += $('.passport li:eq(1) a').attr('onclick').slice(5,$('.passport li:eq(1) a').attr('onclick').indexOf(')'));
+					htmldata += ")'>";
 					htmldata += data[i].name;
 					htmldata += "</a>[BY]<a href='javascript:' onclick='view(";
 					htmldata += data[i].singerid;
@@ -210,6 +212,7 @@ function detail(){
 //查看个人信息
 	function view(uid) {
 		slide('viewbox');
+		listen_reset();
 		$.get('/fifth/voice/index.php/Index/ajax_view?uid='+uid,function(data){
 			data=eval("("+data+")");
 			var htmldata="<div class='information'>";
@@ -230,14 +233,20 @@ function detail(){
 			$('#portraitsbox').empty();
 			$('#portraitsbox').append('<div><img id="portraits" src="/fifth/voice/Upload/portraits/'+data[0].portraits+'" /></div>');
 			$('#portraitsbox').append('<input type="file" id="newimg" name="newimg" style="display:none" />');
-
+			if ($('#portraits').height()>$('#portraits').width()) {
+				$('#portraits').height(150);
+			} else {
+				$('#portraits').width(100);
+			}
 			$('#songlist').empty();
 				htmldata = '<ul>';
 				if (data[1]!=0) {
 					for (var i = 0; i < data[1].length; i++) {
 						htmldata += "<li><a href='javascript:' onclick='choose(";
 						htmldata += data[1][i].id;
-						htmldata += ",1)'>";
+						htmldata += ",";
+						htmldata += data[0].id;
+						htmldata +=")'>";
 						htmldata += data[1][i].name;
 						htmldata += "</a>[BY]<a href='javascript:' onclick='view(";
 						htmldata += data[1][i].singerid;
@@ -260,12 +269,14 @@ function detail(){
 		$('#portraits').attr('onclick','changeimg()');
 		$('#startedit').css('display','none');
 		$('#submitedit').css('display','block');
+		$('.information:first').append('点击头像修改头像');
 	}
 
 	function changeimg() {
 		$('#newimg').click();
 		$('#newimg').change(function(){
-	        $('#portraitsbox').append('<div style="text-align:center;vertical-align:center;background-color:white;">已经收到新头像</div>')
+			$('#portraitsbox div:gt(0)').remove();
+	        $('#portraitsbox').append('<div style="text-align:center;vertical-align:center;background-color:white;">收到新头像</div>')
 	    });
 	}
 

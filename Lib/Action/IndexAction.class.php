@@ -234,11 +234,11 @@ class IndexAction extends Action{
                 // $song_id_list=json_decode($this->cookie2json($_COOKIE['list']),true);
                 
                 $a=$this->check_session();
-                if (($list==1)&&($a!=0)) {
-                    $search['stuid']=$a['stuid'];
-                    $guestinfo=$guest->where($search)->find();
-                    unset($search);
-                    $search['guestid']=$guestinfo['id'];
+                if (($list>0)&&($a!=0)) {
+                    // $search['stuid']=$a['stuid'];
+                    // $guestinfo=$guest->where($search)->find();
+                    // unset($search);
+                    $search['guestid']=$list;
                     $song_id_list=$favorite->where($search)->getField('songid',true);
                     unset($search);
                 } else {
@@ -373,28 +373,28 @@ class IndexAction extends Action{
                     case 'songname':
                         $search['name']=array('like',$content);
                         foreach ($song->where($search)->select() as $key => $value) {
-                            $result[]="<a href='' onclick='choose(".$value['id'].");return false'>".$value['name']."</a>[BY]<a href='/fifth/voice/index.php/Index/view?guestid=".$value['singerid']."'>".$value['singer']."</a>";
+                            $result[]="<a href='' onclick='choose(".$value['id'].");return false'>".$value['name']."</a>[BY]<a href='javascript:' onclick='view(".$value['id'].")'>".$value['singer']."</a>";
                         }
                         unset($search);
                         break;
                     case 'nickname':
                         $search['nickname']=array('like',$content);
                         foreach ($guest->where($search)->select() as $key => $value) {
-                            $result[]="<a href='/fifth/voice/index.php/Index/view?guestid=".$value['id']."'>".$value['nickname']."</a>";
+                            $result[]="<a href='javascript:' onclick='view(".$value['id'].")'>".$value['nickname']."</a>";
                         }
                         unset($search);
                         break;
                     case 'constellation':
                         $search['constellation']=array('like',$content);
                         foreach ($guest->where($search)->select() as $key => $value) {
-                            $result[]="[".$value['constellation']."]<a href='/fifth/voice/index.php/Index/view?guestid=".$value['id']."'>".$value['nickname']."</a>";
+                            $result[]="[".$value['constellation']."]<a href='javascript:' onclick='view(".$value['id'].")'>".$value['nickname']."</a>";
                         }
                         unset($search);
                         break;
                     case 'sex':
                         $search['sex']=array('like',$content);
                         foreach ($guest->where($search)->select() as $key => $value) {
-                            $result[]="[".$value['sex']."]<a href='/fifth/voice/index.php/Index/view?guestid=".$value['id']."'>".$value['nickname']."</a>";
+                            $result[]="[".$value['sex']."]<a href='javascript:' onclick='view(".$value['id'].")'>".$value['nickname']."</a>";
                         }
                         unset($search);
                         break;
