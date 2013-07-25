@@ -195,7 +195,7 @@ function choose(songid,list) {
 function detail(){
 	$('#detail').remove();
 	$('div.detail').append("<p id='detail'>正在播放：<br />"+now.name+"[BY]<a href='javascript:' onclick='view("+now.singerid+")'>"+now.singer+"</a><br />--------------------<br />"+now.message+"</p>");
-	$.get('/fifth/voice/index.php/Index/ajax_likeOrNot?songid='+now.id,function(data){
+	$.get('/fifth/voice/index.php/Index/ajax?action=check&songid='+now.id,function(data){
 		// alert('s');
 		if (data==1) {
 			content='like_hover';
@@ -304,7 +304,7 @@ function detail(){
 			var target=$('#target').val();
 			var content=$('#content').val();
 			$('#result').html('');
-			$.get('/fifth/voice/index.php/Index/ajax_search?target='+target+'&content='+content,function(data){
+			$.get('/fifth/voice/index.php/Index/ajax?action=search&target='+target+'&content='+content,function(data){
 				for (i=0;i<data.length;i++) {
 					$('#result').append("<li>"+data[i]+"</li>");
 				};
@@ -584,7 +584,7 @@ function like_click(){
 	} else {
 		action=0;
 	}
-	$.get('/fifth/voice/index.php/Index/ajax_like?action='+action,function(data){
+	$.get('/fifth/voice/index.php/Index/ajax?action=like',function(data){
 		if (data) {
 			$(".jp-like").css("background-image","url(/fifth/voice/Tpl/Public/pic/like_hover.png)");
 		} else if (!action) {

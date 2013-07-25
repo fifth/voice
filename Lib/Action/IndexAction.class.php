@@ -145,7 +145,7 @@ class IndexAction extends Action{
                     echo 0;
                 }
                 break;
-            case 'play':
+            case 'play'://播放
                 if (!isset($_COOKIE['list'])) {
                     die();
                 }
@@ -161,7 +161,7 @@ class IndexAction extends Action{
                 $re['singer']=$guest->where('id='.$re['singerid'])->getField('nickname');
                 echo json_encode($re);
                 break;
-            case 'next':
+            case 'next'://下一首
                 if (!isset($_COOKIE['list'])) {
                     die();
                 }
@@ -192,7 +192,7 @@ class IndexAction extends Action{
                 setcookie('nowplaying',$nowplaying);
                 echo json_encode($re);
                 break;
-            case 'previous':
+            case 'previous'://上一首
                 if (!isset($_COOKIE['list'])) {
                     die();
                 }
@@ -256,6 +256,156 @@ class IndexAction extends Action{
                         die();
                     }
                 }
+                break;
+            case 'like'://收藏或者取消收藏歌曲
+                //检查是否已登陆，若未登录则跳转回首页
+                if ($a==0) {
+                    $this->redirect('/Index/index');
+                    die();
+                }
+                //从cookie获取播放信息
+                // $action=$this->_param('action');
+                $song_id_list=json_decode($this->cookie2json($_COOKIE['list']),true);
+                //从数据库拉取信息
+                $search['id']=$song_id_list[$_COOKIE['nowplaying']];
+                $songinfo=$song->where($search)->find();
+                unset($search);
+                $search['stuid']=$a['stuid'];
+                $guestinfo=$guest->where($search)->find();
+                unset($search);
+                //查询是否已经收藏该歌曲
+                $search['guestid']=$guestinfo['id'];
+                $search['songid']=$songinfo['id'];
+                $exist=$favorite->where($search)->find();
+                unset($search);
+                //收藏/取消收藏操作
+                if (!$exist) {
+                    //歌手是否被收藏
+                    $search['guestid']=$guestinfo['id'];
+                    $search['singerid']=$songinfo['singerid'];
+                    $find=$favorite->where($search)->find();
+                    unset($search);
+                    //若从未收藏过该歌手的歌，则该歌手热门度+1
+                    if (!$find) {
+                        $search['singerid']=$songinfo['singerid'];
+                        $hotsinger->where($search)->setInc('mark');
+                        unset($search);
+                    }
+                    //添加到收藏列表
+                    $data['guestid']=$guestinfo['id'];
+                    $data['songid']=$songinfo['id'];
+                    $data['singerid']=$songinfo['singerid'];
+                    $favorite->add($data);
+                    unset($data);
+                    //歌曲被收藏数+1
+                    $search['songid']=$songinfo['id'];
+                    $hotsong->where($search)->setInc('mark');
+                    unset($search);
+                    //添加到动态
+                    $data['type']=3;
+                    $data['stuid']=$guestinfo['stuid'];
+                    $data['songid']=$songinfo['id'];
+                    $data['singerid']=$songinfo['singerid'];
+                    $data['guestid']=$guestinfo['id'];
+                    $news->add($data);
+                    unset($data);
+                    echo 1;
+                } elseif ($exist) {
+                    //从收藏夹删除
+                    $search['guestid']=$guestinfo['id'];
+                    $search['songid']=$songinfo['id'];
+                    $favorite->where($search)->delete();
+                    unset($search);
+                    //歌曲被收藏数-1
+                    $search['songid']=$songinfo['id'];
+                    $hotsong->where($search)->setDec('mark');
+                    unset($search);
+                    //从动态中删除
+                    $search['type']=3;
+                    $search['guestid']=$guestinfo['id'];
+                    $search['songid']=$songinfo['id'];
+                    $news->where($search)->delete();
+                    unset($search);
+                    //歌手是否被收藏
+                    $search['guestid']=$guestinfo['id'];
+                    $search['singerid']=$songinfo['singerid'];
+                    $find=$favorite->where($search)->find();
+                    unset($search);
+                    //操作后若没有收藏该歌手的歌，则歌手热门度-1
+                    if (!$find) {
+                        $search['singerid']=$songinfo['singerid'];
+                        $hotsinger->where($search)->setDec('mark');
+                        unset($search);
+                    }
+                    echo 0;
+                }
+                break;
+            case 'check'://检查歌曲是否被收藏
+                if ($a==0) {
+                    // $this->redirect('/Index/index');
+                    die();
+                }
+                $search['stuid']=$a['stuid'];
+                $guestinfo=$guest->where($search)->find();
+                unset($search);
+                //在favorite中查找记录
+                $search['guestid']=$guestinfo['id'];
+                $search['songid']=$this->_param('songid');
+                $exist=$favorite->where($search)->find();
+                unset($search);
+                //判断是否存在于收藏列表
+                if ($exist) {
+                    echo 1;
+                } elseif (!$exist) {
+                    echo 0;
+                }
+                break;
+            case 'search'://搜索功能
+                if ($a==0) {
+                    $result[]='请使用求是潮通行证登陆之后再使用搜索功能呦~';
+                    echo json_encode($result);
+                    die();
+                }
+                //获取参数
+                $target=$this->_param('target');
+                $content='%'.$this->_param('content').'%';
+                switch ($target) {
+                    case 'songname':
+                        $search['name']=array('like',$content);
+                        foreach ($song->where($search)->select() as $key => $value) {
+                            $result[]="<a href='' onclick='choose(".$value['id'].");return false'>".$value['name']."</a>[BY]<a href='/fifth/voice/index.php/Index/view?guestid=".$value['singerid']."'>".$value['singer']."</a>";
+                        }
+                        unset($search);
+                        break;
+                    case 'nickname':
+                        $search['nickname']=array('like',$content);
+                        foreach ($guest->where($search)->select() as $key => $value) {
+                            $result[]="<a href='/fifth/voice/index.php/Index/view?guestid=".$value['id']."'>".$value['nickname']."</a>";
+                        }
+                        unset($search);
+                        break;
+                    case 'constellation':
+                        $search['constellation']=array('like',$content);
+                        foreach ($guest->where($search)->select() as $key => $value) {
+                            $result[]="[".$value['constellation']."]<a href='/fifth/voice/index.php/Index/view?guestid=".$value['id']."'>".$value['nickname']."</a>";
+                        }
+                        unset($search);
+                        break;
+                    case 'sex':
+                        $search['sex']=array('like',$content);
+                        foreach ($guest->where($search)->select() as $key => $value) {
+                            $result[]="[".$value['sex']."]<a href='/fifth/voice/index.php/Index/view?guestid=".$value['id']."'>".$value['nickname']."</a>";
+                        }
+                        unset($search);
+                        break;
+                    default:
+                        $result[]='好的嘛，找不到呦XD';
+                        break;
+                }
+                if (!$result) {
+                    $result[]='好的嘛，找不到呦XD';
+                }
+                echo json_encode($result);
                 break;
             default:
                 
@@ -367,266 +517,266 @@ class IndexAction extends Action{
     // }
     // public function ajax_gettoplist(){
     // }
-    public function ajax_changeList(){
-    //ajax动作，用作切换播放列表
-        //连接数据库
-        $song=M('song');
-        //获取操作
-        $action=$this->_param('action');
-        //从cookie获取当前列表信息
-        $song_id_list=json_decode($this->cookie2json($_COOKIE['list']),true);
-        $nowplaying=$song_id_list[$_COOKIE['nowplaying']];
-        //切换播放列表
-        if ($action=='order') {//以id排序
-            for ($i=0;$i<count($song_id_list)-1;$i++) { 
-                for ($j=$i+1;$j<count($song_id_list);$j++) {
-                    if ($song_id_list[$i]['id']<$song_id_list[$j]['id']) {
-                        $tmp=$song_id_list[$i];
-                        $song_id_list[$i]=$song_id_list[$j];
-                        $song_id_list[$j]=$tmp;
-                    }
-                }
-            }
-        } elseif ($action=='random') {//打乱顺序
-            shuffle($song_id_list);
-        }
-        //获取歌曲信息
-        foreach ($song_id_list as $key => $value) {
-            $search['id']=$value['id'];
-            $song_list[]=$song->where($search)->find();
-            //$search['id']被覆盖，不需要清空
-        }
-        unset($search);
-        //
-        setcookie('nowplaying',array_search($nowplaying, $song_id_list));
-        setcookie('list',json_encode($song_id_list));
-        //die(var_dump($song_list));
-        echo json_encode($song_list);
-    }
-    public function ajax_likeOrNot(){
-    //ajax动作，用作判断歌曲是否已收藏
-    //已收藏返回1，未收藏返回0
-        //数据库连接
-        $song=M('song');
-        $guest=M('guest');
-        $favorite=M('favorite');
-        //检查是否已登陆，若未登录则跳转回首页
-        $a=$this->check_session();
-        if ($a==0) {
-            $this->redirect('/Index/index');
-            die();
-        }
-        //从数据库获取歌手信息
-        $search['stuid']=$a['stuid'];
-        $guestinfo=$guest->where($search)->find();
-        unset($search);
-        //在favorite中查找记录
-        $search['guestid']=$guestinfo['id'];
-        $search['songid']=$this->_param('songid');
-        $exist=$favorite->where($search)->find();
-        unset($search);
-        //判断是否存在于收藏列表
-        if ($exist) {
-            echo 1;
-        } elseif (!$exist) {
-            echo 0;
-        }
-    }
-    public function ajax_like(){
-    //ajax动作，用作收藏/取消收藏歌曲
-    //若新加了收藏，则返回1；若删除收藏，则返回0
-        //数据库连接
-        $guest=M('guest');
-        $song=M('song');
-        $news=M('news');
-        $favorite=M('favorite');
-        $hotsong=M('hotsong');
-        $hotsinger=M('hotsinger');
-        //检查是否已登陆，若未登录则跳转回首页
-        $a=$this->check_session();
-        if ($a==0) {
-            $this->redirect('/Index/index');
-            die();
-        }
-        //从cookie获取播放信息
-        $action=$this->_param('action');
-        $song_id_list=json_decode($this->cookie2json($_COOKIE['list']),true);
-        //从数据库拉取信息
-        $search['id']=$song_id_list[$_COOKIE['nowplaying']];
-        $songinfo=$song->where($search)->find();
-        unset($search);
-        $search['stuid']=$a['stuid'];
-        $guestinfo=$guest->where($search)->find();
-        unset($search);
-        //查询是否已经收藏该歌曲
-        $search['guestid']=$guestinfo['id'];
-        $search['songid']=$songinfo['id'];
-        $exist=$favorite->where($search)->find();
-        unset($search);
-        //收藏/取消收藏操作
-        if (($action='like')&&(!$exist)) {
-            //歌手是否被收藏
-            $search['guestid']=$guestinfo['id'];
-            $search['singerid']=$songinfo['singerid'];
-            $find=$favorite->where($search)->find();
-            unset($search);
-            //若从未收藏过该歌手的歌，则该歌手热门度+1
-            if (!$find) {
-                $search['singerid']=$songinfo['singerid'];
-                $hotsinger->where($search)->setInc('mark');
-                unset($search);
-            }
-            //添加到收藏列表
-            $data['guestid']=$guestinfo['id'];
-            $data['songid']=$songinfo['id'];
-            $data['singerid']=$songinfo['singerid'];
-            $favorite->add($data);
-            unset($data);
-            //歌曲被收藏数+1
-            $search['songid']=$songinfo['id'];
-            $hotsong->where($search)->setInc('mark');
-            unset($search);
-            //添加到动态
-            $data['type']=3;
-            $data['stuid']=$guestinfo['stuid'];
-            $data['songid']=$songinfo['id'];
-            $data['singerid']=$songinfo['singerid'];
-            $data['guestid']=$guestinfo['id'];
-            $news->add($data);
-            unset($data);
-            echo 1;
-        } elseif (($action='dislike')&&($exist)) {
-            //从收藏夹删除
-            $search['guestid']=$guestinfo['id'];
-            $search['songid']=$songinfo['id'];
-            $favorite->where($search)->delete();
-            unset($search);
-            //歌曲被收藏数-1
-            $search['songid']=$songinfo['id'];
-            $hotsong->where($search)->setDec('mark');
-            unset($search);
-            //从动态中删除
-            $search['type']=3;
-            $search['guestid']=$guestinfo['id'];
-            $search['songid']=$songinfo['id'];
-            $news->where($search)->delete();
-            unset($search);
-            //歌手是否被收藏
-            $search['guestid']=$guestinfo['id'];
-            $search['singerid']=$songinfo['singerid'];
-            $find=$favorite->where($search)->find();
-            unset($search);
-            //操作后若没有收藏该歌手的歌，则歌手热门度-1
-            if (!$find) {
-                $search['singerid']=$songinfo['singerid'];
-                $hotsinger->where($search)->setDec('mark');
-                unset($search);
-            }
-            echo 0;
-        }
+    // public function ajax_changeList(){
+    // //ajax动作，用作切换播放列表
+    //     //连接数据库
+    //     $song=M('song');
+    //     //获取操作
+    //     $action=$this->_param('action');
+    //     //从cookie获取当前列表信息
+    //     $song_id_list=json_decode($this->cookie2json($_COOKIE['list']),true);
+    //     $nowplaying=$song_id_list[$_COOKIE['nowplaying']];
+    //     //切换播放列表
+    //     if ($action=='order') {//以id排序
+    //         for ($i=0;$i<count($song_id_list)-1;$i++) { 
+    //             for ($j=$i+1;$j<count($song_id_list);$j++) {
+    //                 if ($song_id_list[$i]['id']<$song_id_list[$j]['id']) {
+    //                     $tmp=$song_id_list[$i];
+    //                     $song_id_list[$i]=$song_id_list[$j];
+    //                     $song_id_list[$j]=$tmp;
+    //                 }
+    //             }
+    //         }
+    //     } elseif ($action=='random') {//打乱顺序
+    //         shuffle($song_id_list);
+    //     }
+    //     //获取歌曲信息
+    //     foreach ($song_id_list as $key => $value) {
+    //         $search['id']=$value['id'];
+    //         $song_list[]=$song->where($search)->find();
+    //         //$search['id']被覆盖，不需要清空
+    //     }
+    //     unset($search);
+    //     //
+    //     setcookie('nowplaying',array_search($nowplaying, $song_id_list));
+    //     setcookie('list',json_encode($song_id_list));
+    //     //die(var_dump($song_list));
+    //     echo json_encode($song_list);
+    // }
+    // public function ajax_likeOrNot(){
+    // //ajax动作，用作判断歌曲是否已收藏
+    // //已收藏返回1，未收藏返回0
+    //     //数据库连接
+    //     $song=M('song');
+    //     $guest=M('guest');
+    //     $favorite=M('favorite');
+    //     //检查是否已登陆，若未登录则跳转回首页
+    //     $a=$this->check_session();
+    //     if ($a==0) {
+    //         $this->redirect('/Index/index');
+    //         die();
+    //     }
+    //     //从数据库获取歌手信息
+    //     $search['stuid']=$a['stuid'];
+    //     $guestinfo=$guest->where($search)->find();
+    //     unset($search);
+    //     //在favorite中查找记录
+    //     $search['guestid']=$guestinfo['id'];
+    //     $search['songid']=$this->_param('songid');
+    //     $exist=$favorite->where($search)->find();
+    //     unset($search);
+    //     //判断是否存在于收藏列表
+    //     if ($exist) {
+    //         echo 1;
+    //     } elseif (!$exist) {
+    //         echo 0;
+    //     }
+    // }
+    // public function ajax_like(){
+    // //ajax动作，用作收藏/取消收藏歌曲
+    // //若新加了收藏，则返回1；若删除收藏，则返回0
+    //     //数据库连接
+    //     $guest=M('guest');
+    //     $song=M('song');
+    //     $news=M('news');
+    //     $favorite=M('favorite');
+    //     $hotsong=M('hotsong');
+    //     $hotsinger=M('hotsinger');
+    //     //检查是否已登陆，若未登录则跳转回首页
+    //     $a=$this->check_session();
+    //     if ($a==0) {
+    //         $this->redirect('/Index/index');
+    //         die();
+    //     }
+    //     //从cookie获取播放信息
+    //     // $action=$this->_param('action');
+    //     $song_id_list=json_decode($this->cookie2json($_COOKIE['list']),true);
+    //     //从数据库拉取信息
+    //     $search['id']=$song_id_list[$_COOKIE['nowplaying']];
+    //     $songinfo=$song->where($search)->find();
+    //     unset($search);
+    //     $search['stuid']=$a['stuid'];
+    //     $guestinfo=$guest->where($search)->find();
+    //     unset($search);
+    //     //查询是否已经收藏该歌曲
+    //     $search['guestid']=$guestinfo['id'];
+    //     $search['songid']=$songinfo['id'];
+    //     $exist=$favorite->where($search)->find();
+    //     unset($search);
+    //     //收藏/取消收藏操作
+    //     if (!$exist) {
+    //         //歌手是否被收藏
+    //         $search['guestid']=$guestinfo['id'];
+    //         $search['singerid']=$songinfo['singerid'];
+    //         $find=$favorite->where($search)->find();
+    //         unset($search);
+    //         //若从未收藏过该歌手的歌，则该歌手热门度+1
+    //         if (!$find) {
+    //             $search['singerid']=$songinfo['singerid'];
+    //             $hotsinger->where($search)->setInc('mark');
+    //             unset($search);
+    //         }
+    //         //添加到收藏列表
+    //         $data['guestid']=$guestinfo['id'];
+    //         $data['songid']=$songinfo['id'];
+    //         $data['singerid']=$songinfo['singerid'];
+    //         $favorite->add($data);
+    //         unset($data);
+    //         //歌曲被收藏数+1
+    //         $search['songid']=$songinfo['id'];
+    //         $hotsong->where($search)->setInc('mark');
+    //         unset($search);
+    //         //添加到动态
+    //         $data['type']=3;
+    //         $data['stuid']=$guestinfo['stuid'];
+    //         $data['songid']=$songinfo['id'];
+    //         $data['singerid']=$songinfo['singerid'];
+    //         $data['guestid']=$guestinfo['id'];
+    //         $news->add($data);
+    //         unset($data);
+    //         echo 1;
+    //     } elseif ($exist) {
+    //         //从收藏夹删除
+    //         $search['guestid']=$guestinfo['id'];
+    //         $search['songid']=$songinfo['id'];
+    //         $favorite->where($search)->delete();
+    //         unset($search);
+    //         //歌曲被收藏数-1
+    //         $search['songid']=$songinfo['id'];
+    //         $hotsong->where($search)->setDec('mark');
+    //         unset($search);
+    //         //从动态中删除
+    //         $search['type']=3;
+    //         $search['guestid']=$guestinfo['id'];
+    //         $search['songid']=$songinfo['id'];
+    //         $news->where($search)->delete();
+    //         unset($search);
+    //         //歌手是否被收藏
+    //         $search['guestid']=$guestinfo['id'];
+    //         $search['singerid']=$songinfo['singerid'];
+    //         $find=$favorite->where($search)->find();
+    //         unset($search);
+    //         //操作后若没有收藏该歌手的歌，则歌手热门度-1
+    //         if (!$find) {
+    //             $search['singerid']=$songinfo['singerid'];
+    //             $hotsinger->where($search)->setDec('mark');
+    //             unset($search);
+    //         }
+    //         echo 0;
+    //     }
 
-        // //获取更新之后的收藏列表
-        // $search['guestid']=$guestinfo['id'];
-        // $favorite_id_list=$favorite->where($search)->select();
-        // unset($search);
-        // //获取收藏歌曲的信息
-        // foreach ($favorite_id_list as $key => $value) {
-        //     $search['id']=$value['songid'];
-        //     $favorite_list[]=$song->where($search)->find();
-        //     //由于$search['id']的值被覆盖，这边不需要清空$search数组
-        // }
-        // unset($search);
-        // echo json_encode($favorite_list);
-    }
-    public function ajax_get(){
-    //ajax动作，用作获取歌曲
-        //连接数据库
-        $guest=M('guest');
-        $song=M('song');
-        //非听歌页面时没有list，初始状态为空
-        if (!isset($_COOKIE['list'])) {
-            die();
-        }
-        //从cookie获取播放信息
-        $song_id_list=json_decode($this->cookie2json($_COOKIE['list']),true);
-        if (isset($_COOKIE['nowplaying'])) {
-            $nowplaying=(int)$_COOKIE['nowplaying'];
-        } else {
-            $nowplaying=0;
-        }
-        $nowplaying++;
-        // //根据播放模式来获得下一首歌的id
-        // switch ($_COOKIE['mode']) {
-        //     case '3'://single模式id不变
-        //         break;
-        //     case '2'://random模式随机获得一个id
-        //         $nowplaying=rand(0,count($song_id_list)-1);
-        //         break;
-        //     case '1'://order模式id+1
-        //         if (($nowplaying>=count($song_id_list)-1)||($nowplaying<0)) {
-        //             $nowplaying=0;
-        //         } else {
-        //             $nowplaying++;
-        //         }
-        //         break;
-        //     default:
-        //         $nowplaying=0;
-        //         break;
-        // }
-        //设置cookie
-        setcookie('nowplaying',$nowplaying);
-        $search['id']=$song_id_list[$nowplaying];
-        $re=$song->where($search)->find();
-        $re['singer']=$guest->where('id='.$re['singerid'])->getField('nickname');
-        echo json_encode($re);
-    }
-    public function ajax_changemode(){
-    //ajax动作，用作改变播放模式
-    //1 for order, 2 for random, 3 for single
-        if (isset($_COOKIE['mode'])) {
-            $mode=fmod($_COOKIE['mode'],3)+1;
-        } else {
-            $mode=1;
-        }
-        //设置cookie
-        setcookie('mode',$mode);
-        switch ($mode) {
-            case '1':
-                echo 'order';
-                break;
-            case '2':
-                echo 'random';
-                break;
-            case '3':
-                echo 'single';
-                break;
-            default:
-                echo 'order';
-                break;
-        }
-    }
-    public function ajax_choose(){
-    //ajax动作，用作选择歌曲播放
-        $song=M('song');
-        $guest=M('guest');
-        $songid=$this->_param('songid');
-        if (!isset($_COOKIE['list'])) {
-            $search['id']=$songid;
-            echo json_encode($song->where($search)->find());
-            die();
-        }
-        $song_id_list=json_decode($this->cookie2json($_COOKIE['list']),true);
-        foreach ($song_id_list as $key => $value) {
-            if ($value['id']==$songid) {
-                setcookie('nowplaying',$key);
-                $search['id']=$songid;
-                $re=$song->where($search)->find();
-                $re['singer']=$guest->where('id='.$re['singerid'])->getField('nickname');
-                echo json_encode($re);
-                die();
-            }
-        }
-    }
+    //     // //获取更新之后的收藏列表
+    //     // $search['guestid']=$guestinfo['id'];
+    //     // $favorite_id_list=$favorite->where($search)->select();
+    //     // unset($search);
+    //     // //获取收藏歌曲的信息
+    //     // foreach ($favorite_id_list as $key => $value) {
+    //     //     $search['id']=$value['songid'];
+    //     //     $favorite_list[]=$song->where($search)->find();
+    //     //     //由于$search['id']的值被覆盖，这边不需要清空$search数组
+    //     // }
+    //     // unset($search);
+    //     // echo json_encode($favorite_list);
+    // }
+    // public function ajax_get(){
+    // //ajax动作，用作获取歌曲
+    //     //连接数据库
+    //     $guest=M('guest');
+    //     $song=M('song');
+    //     //非听歌页面时没有list，初始状态为空
+    //     if (!isset($_COOKIE['list'])) {
+    //         die();
+    //     }
+    //     //从cookie获取播放信息
+    //     $song_id_list=json_decode($this->cookie2json($_COOKIE['list']),true);
+    //     if (isset($_COOKIE['nowplaying'])) {
+    //         $nowplaying=(int)$_COOKIE['nowplaying'];
+    //     } else {
+    //         $nowplaying=0;
+    //     }
+    //     $nowplaying++;
+    //     // //根据播放模式来获得下一首歌的id
+    //     // switch ($_COOKIE['mode']) {
+    //     //     case '3'://single模式id不变
+    //     //         break;
+    //     //     case '2'://random模式随机获得一个id
+    //     //         $nowplaying=rand(0,count($song_id_list)-1);
+    //     //         break;
+    //     //     case '1'://order模式id+1
+    //     //         if (($nowplaying>=count($song_id_list)-1)||($nowplaying<0)) {
+    //     //             $nowplaying=0;
+    //     //         } else {
+    //     //             $nowplaying++;
+    //     //         }
+    //     //         break;
+    //     //     default:
+    //     //         $nowplaying=0;
+    //     //         break;
+    //     // }
+    //     //设置cookie
+    //     setcookie('nowplaying',$nowplaying);
+    //     $search['id']=$song_id_list[$nowplaying];
+    //     $re=$song->where($search)->find();
+    //     $re['singer']=$guest->where('id='.$re['singerid'])->getField('nickname');
+    //     echo json_encode($re);
+    // }
+    // public function ajax_changemode(){
+    // //ajax动作，用作改变播放模式
+    // //1 for order, 2 for random, 3 for single
+    //     if (isset($_COOKIE['mode'])) {
+    //         $mode=fmod($_COOKIE['mode'],3)+1;
+    //     } else {
+    //         $mode=1;
+    //     }
+    //     //设置cookie
+    //     setcookie('mode',$mode);
+    //     switch ($mode) {
+    //         case '1':
+    //             echo 'order';
+    //             break;
+    //         case '2':
+    //             echo 'random';
+    //             break;
+    //         case '3':
+    //             echo 'single';
+    //             break;
+    //         default:
+    //             echo 'order';
+    //             break;
+    //     }
+    // }
+    // public function ajax_choose(){
+    // //ajax动作，用作选择歌曲播放
+    //     $song=M('song');
+    //     $guest=M('guest');
+    //     $songid=$this->_param('songid');
+    //     if (!isset($_COOKIE['list'])) {
+    //         $search['id']=$songid;
+    //         echo json_encode($song->where($search)->find());
+    //         die();
+    //     }
+    //     $song_id_list=json_decode($this->cookie2json($_COOKIE['list']),true);
+    //     foreach ($song_id_list as $key => $value) {
+    //         if ($value['id']==$songid) {
+    //             setcookie('nowplaying',$key);
+    //             $search['id']=$songid;
+    //             $re=$song->where($search)->find();
+    //             $re['singer']=$guest->where('id='.$re['singerid'])->getField('nickname');
+    //             echo json_encode($re);
+    //             die();
+    //         }
+    //     }
+    // }
     public function ajax_view(){
         $guest=M('guest');
         $favorite=M('favorite');
@@ -799,58 +949,58 @@ class IndexAction extends Action{
     //     }
     // }
 
-    public function ajax_search(){
-    //ajax动作，用作搜索
-        //数据库连接
-        $song=M('song');
-        $guest=M('guest');
-        //检查是否已登陆，若未登录则跳转回首页
-        $a=$this->check_session();
-        if ($a==0) {
-            $this->redirect('/Index/index');
-            die();
-        }
-        //获取参数
-        $target=$this->_param('target');
-        $content='%'.$this->_param('content').'%';
-        switch ($target) {
-            case 'songname':
-                $search['name']=array('like',$content);
-                foreach ($song->where($search)->select() as $key => $value) {
-                    $result[]="<a href='' onclick='choose(".$value['id'].");return false'>".$value['name']."</a>[BY]<a href='/fifth/voice/index.php/Index/view?guestid=".$value['singerid']."'>".$value['singer']."</a>";
-                }
-                unset($search);
-                break;
-            case 'nickname':
-                $search['nickname']=array('like',$content);
-                foreach ($guest->where($search)->select() as $key => $value) {
-                    $result[]="<a href='/fifth/voice/index.php/Index/view?guestid=".$value['id']."'>".$value['nickname']."</a>";
-                }
-                unset($search);
-                break;
-            case 'constellation':
-                $search['constellation']=array('like',$content);
-                foreach ($guest->where($search)->select() as $key => $value) {
-                    $result[]="[".$value['constellation']."]<a href='/fifth/voice/index.php/Index/view?guestid=".$value['id']."'>".$value['nickname']."</a>";
-                }
-                unset($search);
-                break;
-            case 'sex':
-                $search['sex']=array('like',$content);
-                foreach ($guest->where($search)->select() as $key => $value) {
-                    $result[]="[".$value['sex']."]<a href='/fifth/voice/index.php/Index/view?guestid=".$value['id']."'>".$value['nickname']."</a>";
-                }
-                unset($search);
-                break;
-            default:
-                $rasult[]='好的嘛，找不到呦XD';
-                break;
-        }
-        if (!$result) {
-            $rasult[]='好的嘛，找不到呦XD';
-        }
-        echo json_encode($result);
-    }
+    // public function ajax_search(){
+    // //ajax动作，用作搜索
+    //     //数据库连接
+    //     $song=M('song');
+    //     $guest=M('guest');
+    //     //检查是否已登陆，若未登录则跳转回首页
+    //     $a=$this->check_session();
+    //     if ($a==0) {
+    //         $this->redirect('/Index/index');
+    //         die();
+    //     }
+    //     //获取参数
+    //     $target=$this->_param('target');
+    //     $content='%'.$this->_param('content').'%';
+    //     switch ($target) {
+    //         case 'songname':
+    //             $search['name']=array('like',$content);
+    //             foreach ($song->where($search)->select() as $key => $value) {
+    //                 $result[]="<a href='' onclick='choose(".$value['id'].");return false'>".$value['name']."</a>[BY]<a href='/fifth/voice/index.php/Index/view?guestid=".$value['singerid']."'>".$value['singer']."</a>";
+    //             }
+    //             unset($search);
+    //             break;
+    //         case 'nickname':
+    //             $search['nickname']=array('like',$content);
+    //             foreach ($guest->where($search)->select() as $key => $value) {
+    //                 $result[]="<a href='/fifth/voice/index.php/Index/view?guestid=".$value['id']."'>".$value['nickname']."</a>";
+    //             }
+    //             unset($search);
+    //             break;
+    //         case 'constellation':
+    //             $search['constellation']=array('like',$content);
+    //             foreach ($guest->where($search)->select() as $key => $value) {
+    //                 $result[]="[".$value['constellation']."]<a href='/fifth/voice/index.php/Index/view?guestid=".$value['id']."'>".$value['nickname']."</a>";
+    //             }
+    //             unset($search);
+    //             break;
+    //         case 'sex':
+    //             $search['sex']=array('like',$content);
+    //             foreach ($guest->where($search)->select() as $key => $value) {
+    //                 $result[]="[".$value['sex']."]<a href='/fifth/voice/index.php/Index/view?guestid=".$value['id']."'>".$value['nickname']."</a>";
+    //             }
+    //             unset($search);
+    //             break;
+    //         default:
+    //             $result[]='好的嘛，找不到呦XD';
+    //             break;
+    //     }
+    //     if (!$result) {
+    //         $result[]='好的嘛，找不到呦XD';
+    //     }
+    //     echo json_encode($result);
+    // }
     public function index(){
     //共有函数，用作首页信息展示
         //数据库连接
