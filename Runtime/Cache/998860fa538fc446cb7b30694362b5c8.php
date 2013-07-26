@@ -65,18 +65,18 @@
 		<div class="jp-type-single">
 		    <div class="jp-gui jp-interface">
 		        <ul class="jp-controls">
-			                <li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
-		    	            <li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
-		        	        <li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>
-		    	            <li><a href="javascript:;" class="jp-previous" tabindex="1" onclick="previous_click()">previous</a></li>
-		    	            <li><a href="javascript:;" class="jp-next" tabindex="1" onclick="next_click()">next</a></li>
+			                <li><a href="javascript:;" class="jp-play" tabindex="1" title="播放">play</a></li>
+		    	            <li><a href="javascript:;" class="jp-pause" tabindex="1" title="暂停">pause</a></li>
+		        	        <li><a href="javascript:;" class="jp-stop" tabindex="1" title="停止">stop</a></li>
+		    	            <li><a href="javascript:;" class="jp-previous" tabindex="1" title="上一首" onclick="previous_click()">previous</a></li>
+		    	            <li><a href="javascript:;" class="jp-next" tabindex="1" title="下一首" onclick="next_click()">next</a></li>
 		    	            <?php if(isset($notlogin)): else: ?>
-								<li><a href="javascript:;" class="jp-like" tabindex="1" onclick="like_click()" onmouseover="like_hover()" onmouseout="like_default()">like</a></li><?php endif; ?>
-							<li><a href="javascript:;" class="jp-random" tabindex="1" onclick="random_click()" onmouseover="random_hover()" onmouseout="random_default()">random</a></li>
-							<li><a href="javascript:;" class="jp-circle" tabindex="1" onclick="circle_click()" onmouseover="circle_hover()" onmouseout="circle_default()">circle</a></li>
-		                    <li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>
-		               	    <li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
-		                   	<li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>
+								<li><a href="javascript:;" class="jp-like" tabindex="1" title="收藏" onclick="like_click()" onmouseover="like_hover()" onmouseout="like_default()">like</a></li><?php endif; ?>
+							<li><a href="javascript:;" class="jp-random" tabindex="1" title="随机播放" onclick="random_click()" onmouseover="random_hover()" onmouseout="random_default()">random</a></li>
+							<li><a href="javascript:;" class="jp-circle" tabindex="1" title="循环播放" onclick="circle_click()" onmouseover="circle_hover()" onmouseout="circle_default()">circle</a></li>
+		                    <li><a href="javascript:;" class="jp-mute" tabindex="1" title="音量">mute</a></li>
+		               	    <li><a href="javascript:;" class="jp-unmute" tabindex="1" title="静音">unmute</a></li>
+		                   	<li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="最大">max volume</a></li>
 			    </ul>
 			   	<div class="jp-progress">
 		       		<div class="jp-seek-bar">

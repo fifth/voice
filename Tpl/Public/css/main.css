@@ -305,8 +305,9 @@ img {
 	}
 
 /*playlistbox播放列表模块*/
+/*toplistbox排行榜模块*/
 
-	#playlistbox {
+	#playlistbox, #toplistbox {
 		display: none;
 		position: absolute;
 		top: 350px;
@@ -316,7 +317,7 @@ img {
 		box-shadow: -10px 10px 10px #E1E1DA;
 	}
 
-	#alllist {
+	#alllist, #topsongbox {
 		position: absolute;
 		left: 0px;
 		width: 325px;
@@ -325,7 +326,7 @@ img {
 		box-shadow: -10px 10px 10px #E1E1DA;
 	}
 
-	#alllist ul {
+	#alllist ul, #topsongbox ul {
 		margin: 0px;
 		padding: 25px;
 		position: absolute;
@@ -334,7 +335,7 @@ img {
 		overflow: auto;
 	}
 
-	#favoritelist {
+	#favoritelist, #topsingerbox, #songlist {
 		position: absolute;
 		right: 0px;
 		width: 325px;
@@ -344,7 +345,7 @@ img {
 		overflow: auto;
 	}
 
-	#favoritelist ul {
+	#favoritelist ul, #topsingerlist ul, #songlist ul {
 		margin: 0px;
 		padding: 25px;
 		position: absolute;
@@ -478,16 +479,6 @@ img {
 		bottom: 0px;
 	}
 
-	#songlist {
-		position: absolute;
-		right: 0px;
-		width: 325px;
-		height: 250px;
-		background-color: white;
-		box-shadow: -10px 10px 10px #E1E1DA;
-		overflow: auto;
-	}
-
 /*searchbox搜索模块*/
 
 	#searchbox {
@@ -501,35 +492,7 @@ img {
 		box-shadow: -10px 10px 10px #E1E1DA;
 	}
 
-/*toplistbox排行榜模块*/
 
-	#toplistbox {
-		display: none;
-		position: absolute;
-		top: 350px;
-		right: -705px;
-		width: 700px;
-		height: 250px;
-		box-shadow: -10px 10px 10px #E1E1DA;
-	}
-
-	#topsongbox {
-		position: absolute;
-		left: 0px;
-		width: 325px;
-		height: 250px;
-		background-color: white;
-		box-shadow: -10px 10px 10px #E1E1DA;
-	}
-
-	#topsingerbox {
-		position: absolute;
-		right: 0px;
-		width: 325px;
-		height: 250px;
-		background-color: white;
-		box-shadow: -10px 10px 10px #E1E1DA;
-	}
 
 
 

@@ -30,7 +30,7 @@ function GetCookie(name) {
 }
 
 //全局变量，用作储存当前播放歌曲的信息，json格式
-	var now;
+var now;
 
 function slidein(boxname) {
 	$('#'+boxname).css('display','block');
@@ -79,6 +79,7 @@ function slide(boxname) {
 		slidein('playlistbox');
 		slideout('viewbox');
 		slideout('toplistbox');
+		// listen_reset();
 		$.get('/fifth/voice/index.php/Index/ajax?action=getalllist',function(data){
 			data = eval("("+data+")");
 			$('#alllist').empty();
@@ -121,6 +122,7 @@ function slide(boxname) {
 			htmldata += '</ul>';
 			$('#favoritelist').append(htmldata);
 		});
+		// alert(GetCookie('list'));
 		$('#jquery_jplayer_1').jPlayer({
 		ready:function(){
 			$.get('/fifth/voice/index.php/Index/ajax?action=play',function(data){
@@ -160,8 +162,45 @@ function slide(boxname) {
 		slideout('playlistbox');
 		slideout('viewbox');
 		slidein('toplistbox');
-			$.get('/fifth/voice/index.php/Index/ajax_gettoplist',function(data){
-			});
+		$.get('/fifth/voice/index.php/Index/ajax?action=gettoplist',function(data){
+			data = eval("("+data+")");
+			$('#topsongbox').empty();
+			var htmldata = '<ul>';
+			for (var i = 0; i < data[0].length; i++) {
+				if (data[0][i].mark==0) {
+					continue;
+				}
+				htmldata += "<li><a href='javascript:' onclick='choose(";
+				htmldata += data[0][i].id;
+				htmldata += ",0)'>";
+				htmldata += data[0][i].name;
+				htmldata += "</a>[BY]<a href='javascript:' onclick='view(";
+				htmldata += data[0][i].singerid;
+				htmldata += ")'>";
+				htmldata += data[0][i].singer;
+				htmldata += "</a>--liked by ";
+				htmldata += data[0][i].mark;
+				htmldata +="</li>";
+			};
+			htmldata += '</ul>';
+			$('#topsongbox').append(htmldata);
+			$('#topsingerbox').empty();
+			var htmldata = '<ul>';
+			for (var i = 0; i < data[1].length; i++) {
+				if (data[1][i].mark==0) {
+					continue;
+				}
+				htmldata += "<li><a href='javascript:' onclick='view(";
+				htmldata += data[1][i].id;
+				htmldata += ")'>";
+				htmldata += data[1][i].nickname;
+				htmldata += "</a>--liked by ";
+				htmldata += data[1][i].mark;
+				htmldata += "</li>";
+			};
+			htmldata += '</ul>';
+			$('#topsingerbox').append(htmldata);
+		});
 		break;
 	default:
 		slideout('searchbox');
@@ -187,15 +226,40 @@ function choose(songid,list) {
 	$.get('/fifth/voice/index.php/Index/ajax?action=choose&songid='+songid+'&list='+list,function(data){
 		now=data;
 		detail();
-		$("#jquery_jplayer_1").jPlayer('clearMedia').jPlayer('setMedia',{
+		$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
 			mp3: '/fifth/voice/Upload/song/'+data.address
 		}).jPlayer('play');
+		// $('#jquery_jplayer_1').jPlayer({
+			
+			
+		// ready:function(){
+		// 	$.get('/fifth/voice/index.php/Index/ajax?action=play',function(data){
+		// 		now=data;
+		// 		detail();
+		// 		$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
+		// 			mp3: '/fifth/voice/Upload/song/'+data.address
+		// 		}).jPlayer('play');
+		// 	},'json');
+		// },
+		// ended:function(){
+		// 	$.get('/fifth/voice/index.php/Index/ajax?action=next',function(data){
+		// 		now=data;
+		// 		detail();
+		// 		$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
+		// 			mp3: '/fifth/voice/Upload/song/'+data.address
+		// 		}).jPlayer('play');
+		// 	},'json');
+		// },
+		// swfPath:'/fifth/voice/Tpl/Public',
+		// supplied:'mp3'
+		// });
 	},'json');
 }
 
 //显示当前播放歌曲的信息
 function detail(){
 	$('#detail').remove();
+	// alert(eval(now));
 	$('div.detail').append("<p id='detail'>正在播放：<br />"+now.name+"[BY]<a href='javascript:' onclick='view("+now.singerid+")'>"+now.singer+"</a><br />--------------------<br />"+now.message+"</p>");
 	$.get('/fifth/voice/index.php/Index/ajax?action=check&songid='+now.id,function(data){
 		// alert('s');
@@ -210,162 +274,156 @@ function detail(){
 	},'text');
 }
 //查看个人信息
-	function view(uid) {
-		slide('viewbox');
-		listen_reset();
-		$.get('/fifth/voice/index.php/Index/ajax_view?uid='+uid,function(data){
-			data=eval("("+data+")");
-			var htmldata="<div class='information'>";
-			if (data[0].manage==data[0].id) {
-				htmldata+="<input type='button' id='startedit' onclick='start_edit()' value='启用编辑' />";
-				htmldata+="<input type='submit' id='submitedit' style='display:none' value='提交修改' />";
+function view(uid) {
+	slide('viewbox');
+	listen_reset();
+	$.get('/fifth/voice/index.php/Index/ajax_view?uid='+uid,function(data){
+		data=eval("("+data+")");
+		var htmldata="<div class='information'>";
+		if (data[0].manage==data[0].id) {
+			htmldata+="<input type='button' id='startedit' onclick='start_edit()' value='启用编辑' />";
+			htmldata+="<input type='submit' id='submitedit' style='display:none' value='提交修改' />";
+		} else {
+			htmldata+="<input type='button' onclick='view("+data[0].manage+")' value='查看我的资料' />";
+		}
+		htmldata+="</div>";
+		htmldata+="<div class='information'><input type='text' id='nickname' readonly='readonly' name='nickname' value='"+data[0].nickname+"' placeholder='一个帅气漂亮的昵称？' /></div>";
+		htmldata+="<div class='information'><input type='text' id='sex' readonly='readonly' name='sex' value='"+data[0].sex+"' placeholder='告诉别人你的性别？' /></div>";
+		$('.information').remove();
+		$('#information').append(htmldata);
+		htmldata="<textarea id='signature' name='signature' readonly='readonly' placeholder='说点儿什么吧？'>"+data[0].signature+"</textarea>";
+		$('#signaturebox').empty();
+		$('#signaturebox').append(htmldata);
+		$('#portraitsbox').empty();
+		$('#portraitsbox').append('<div><img id="portraits" src="/fifth/voice/Upload/portraits/'+data[0].portraits+'" /></div>');
+		$('#portraitsbox').append('<input type="file" id="newimg" name="newimg" style="display:none" />');
+		if ($('#portraits').height()>$('#portraits').width()) {
+			$('#portraits').height(150);
+		} else {
+			$('#portraits').width(100);
+		}
+		$('#songlist').empty();
+			htmldata = '<ul>';
+			if (data[1]!=0) {
+				for (var i = 0; i < data[1].length; i++) {
+					htmldata += "<li><a href='javascript:' onclick='choose(";
+					htmldata += data[1][i].id;
+					htmldata += ",";
+					htmldata += data[0].id;
+					htmldata +=")'>";
+					htmldata += data[1][i].name;
+					htmldata += "</a>[BY]<a href='javascript:' onclick='view(";
+					htmldata += data[1][i].singerid;
+					htmldata += ")'>";
+					htmldata += data[1][i].singer;
+					htmldata += "</a></li>";
+				};
 			} else {
-				htmldata+="<input type='button' onclick='view("+data[0].manage+")' value='查看我的资料' />";
+				htmldata += 'no data';
 			}
-			htmldata+="</div>";
-			htmldata+="<div class='information'><input type='text' id='nickname' readonly='readonly' name='nickname' value='"+data[0].nickname+"' placeholder='一个帅气漂亮的昵称？' /></div>";
-			htmldata+="<div class='information'><input type='text' id='sex' readonly='readonly' name='sex' value='"+data[0].sex+"' placeholder='告诉别人你的性别？' /></div>";
-			$('.information').remove();
-			$('#information').append(htmldata);
-			htmldata="<textarea id='signature' name='signature' readonly='readonly' placeholder='说点儿什么吧？'>"+data[0].signature+"</textarea>";
-			$('#signaturebox').empty();
-			$('#signaturebox').append(htmldata);
-			$('#portraitsbox').empty();
-			$('#portraitsbox').append('<div><img id="portraits" src="/fifth/voice/Upload/portraits/'+data[0].portraits+'" /></div>');
-			$('#portraitsbox').append('<input type="file" id="newimg" name="newimg" style="display:none" />');
-			if ($('#portraits').height()>$('#portraits').width()) {
-				$('#portraits').height(150);
-			} else {
-				$('#portraits').width(100);
-			}
-			$('#songlist').empty();
-				htmldata = '<ul>';
-				if (data[1]!=0) {
-					for (var i = 0; i < data[1].length; i++) {
-						htmldata += "<li><a href='javascript:' onclick='choose(";
-						htmldata += data[1][i].id;
-						htmldata += ",";
-						htmldata += data[0].id;
-						htmldata +=")'>";
-						htmldata += data[1][i].name;
-						htmldata += "</a>[BY]<a href='javascript:' onclick='view(";
-						htmldata += data[1][i].singerid;
-						htmldata += ")'>";
-						htmldata += data[1][i].singer;
-						htmldata += "</a></li>";
-					};
-				} else {
-					htmldata += 'no data';
-				}
-				htmldata += '</ul>';
-				$('#songlist').append(htmldata);
-		})
-	}
-
-	function start_edit() {
-		$('#nickname').removeAttr('readonly','readonly');
-		$('#sex').removeAttr('readonly','readonly');
-		$('#signature').removeAttr('readonly','readonly');
-		$('#portraits').attr('onclick','changeimg()');
-		$('#startedit').css('display','none');
-		$('#submitedit').css('display','block');
-		$('.information:first').append('点击头像修改头像');
-	}
-
-	function changeimg() {
-		$('#newimg').click();
-		$('#newimg').change(function(){
-			$('#portraitsbox div:gt(0)').remove();
-	        $('#portraitsbox').append('<div style="text-align:center;vertical-align:center;background-color:white;">收到新头像</div>')
-	    });
-	}
+			htmldata += '</ul>';
+			$('#songlist').append(htmldata);
+	})
+}
+function start_edit() {
+	$('#nickname').removeAttr('readonly','readonly');
+	$('#sex').removeAttr('readonly','readonly');
+	$('#signature').removeAttr('readonly','readonly');
+	$('#portraits').attr('onclick','changeimg()');
+	$('#startedit').css('display','none');
+	$('#submitedit').css('display','block');
+	$('.information:first').append('点击头像修改头像');
+}
+function changeimg() {
+	$('#newimg').click();
+	$('#newimg').change(function(){
+		$('#portraitsbox div:gt(0)').remove();
+        $('#portraitsbox').append('<div style="text-align:center;vertical-align:center;background-color:white;">收到新头像</div>')
+    });
+}
 
 //此js文件用于上传歌曲页面的表单效果展示
 //上传表单效果
-	$(document).ready(function() {
-	    $('#upbox').click(function(){
-	        $('#uploadfile').click();
-	    })
-	    $('#uploadfile').change(function(){
-	        $('#upbox').val($('#uploadfile').val());
-	    })
-	    $("#submit").click(function(){
-	        $("#uploading").css("display","block");
-	    })
-	    $('#submit').ready(function(){
-	        if ($('#read').attr("checked")=="checked") {
-	            $('#submit').removeAttr('disabled','disabled');
-	        }
-	    })
-	    $('#read').click(function(){
-	        if ($('#read').attr("checked")=="checked") {
-	            $("#submit").removeAttr('disabled','disabled');
-	         } else {
-	            $('#submit').attr('disabled','disabled');
-	         }
-	    })
-	})
+$(document).ready(function() {
+    $('#upbox').click(function(){
+        $('#uploadfile').click();
+    })
+    $('#uploadfile').change(function(){
+        $('#upbox').val($('#uploadfile').val());
+    })
+    $("#submit").click(function(){
+        $("#uploading").css("display","block");
+    })
+    $('#submit').ready(function(){
+        if ($('#read').attr("checked")=="checked") {
+            $('#submit').removeAttr('disabled','disabled');
+        }
+    })
+    $('#read').click(function(){
+        if ($('#read').attr("checked")=="checked") {
+            $("#submit").removeAttr('disabled','disabled');
+         } else {
+            $('#submit').attr('disabled','disabled');
+         }
+    })
 
-/*****************************************************/
+	/*****************************************************/
 
-//此js文件用于搜索页面的搜索功能实现
-//搜索功能
-	$(document).ready(function(){
-		$('#search').click(function(){
-			var target=$('#target').val();
-			var content=$('#content').val();
-			$('#result').html('');
-			$.get('/fifth/voice/index.php/Index/ajax?action=search&target='+target+'&content='+content,function(data){
-				for (i=0;i<data.length;i++) {
-					$('#result').append("<li>"+data[i]+"</li>");
-				};
-			},'json');
-		});
+	//此js文件用于搜索页面的搜索功能实现
+	//搜索功能
+	$('#search').click(function(){
+		var target=$('#target').val();
+		var content=$('#content').val();
+		$('#result').html('');
+		$.get('/fifth/voice/index.php/Index/ajax?action=search&target='+target+'&content='+content,function(data){
+			for (i=0;i<data.length;i++) {
+				$('#result').append("<li>"+data[i]+"</li>");
+			};
+		},'json');
 	});
 
-/*****************************************************/
+	/*****************************************************/
 
-//此js文件用于用户个人信息的管理和修改
-	$(document).ready(function(){
-		//默认设置
-		if ($('textarea.info').val()=='') {
-			$('textarea.info').attr('placeholder','说点什么吧？');
-		}
-		if ($('#email').val()=='') {
-			$('#email').attr('placeholder','留个联系方式吧？');
-		}
-		$('.info').attr('readonly','readonly');
-		$('.info_dis').attr('readonly','readonly');
-		var sex='#';
-		sex+=$('#sex').val();
-		if ($('#sex').val()=='保密') {
-			sex+='1';
-		}
-		var constellation='#';
-		constellation+=$('#constellation').val();
-		if ($('#constellation').val()=='保密') {
-			constellation+='2';
-		}
-		//启动修改按钮
-		$('#edit').click(function(){
-			$('.sel').css('display','inline');
-			$('.info').removeAttr('readonly');
-			$('.info_dis').css('display','none');
-			$('#confirm').css('display','inline');
-			$('#edit').css('display','none');
-			$(sex).attr('selected','selected');
-			$(constellation).attr('selected','selected');
-			$('span').css('display','inline');
-			$('#upbox').attr('readonly','readonly');
-		})
-		//上传头像图片
-		$('#browse').click(function(){
-			$('#upimg').click();
-		})
-		$('#upimg').change(function(){
-			$('#upbox').val($('#upimg').val());
-		})
+	//此js文件用于用户个人信息的管理和修改
+	//默认设置
+	if ($('textarea.info').val()=='') {
+		$('textarea.info').attr('placeholder','说点什么吧？');
+	}
+	if ($('#email').val()=='') {
+		$('#email').attr('placeholder','留个联系方式吧？');
+	}
+	$('.info').attr('readonly','readonly');
+	$('.info_dis').attr('readonly','readonly');
+	var sex='#';
+	sex+=$('#sex').val();
+	if ($('#sex').val()=='保密') {
+		sex+='1';
+	}
+	var constellation='#';
+	constellation+=$('#constellation').val();
+	if ($('#constellation').val()=='保密') {
+		constellation+='2';
+	}
+	//启动修改按钮
+	$('#edit').click(function(){
+		$('.sel').css('display','inline');
+		$('.info').removeAttr('readonly');
+		$('.info_dis').css('display','none');
+		$('#confirm').css('display','inline');
+		$('#edit').css('display','none');
+		$(sex).attr('selected','selected');
+		$(constellation).attr('selected','selected');
+		$('span').css('display','inline');
+		$('#upbox').attr('readonly','readonly');
 	})
+	//上传头像图片
+	$('#browse').click(function(){
+		$('#upimg').click();
+	})
+	$('#upimg').change(function(){
+		$('#upbox').val($('#upimg').val());
+	})
+})
 
 /*****************************************************/
 

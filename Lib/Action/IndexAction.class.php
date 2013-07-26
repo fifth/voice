@@ -105,12 +105,18 @@ class IndexAction extends Action{
                     $song_list[$key]['singer']=$guest->where('id='.$song_list[$key]['singerid'])->getField('nickname');
                 }
                 unset($search);
+                // die(var_dump(111));
+                setcookie('list','');
                 setcookie('list',json_encode($song_id_list));
+                setcookie('nowplaying','');
                 setcookie('nowplaying',0);
+                // die(var_dump($_COOKIE['nowplaying']));
                 if (!isset($_COOKIE['random'])) {
+                    setcookie('random','');
                     setcookie('random',0);
                 }
                 if (!isset($_COOKIE['circle'])) {
+                    setcookie('circle','');
                     setcookie('circle',1);
                 }
                 echo json_encode($song_list);
@@ -185,10 +191,12 @@ class IndexAction extends Action{
                 $search['id']=$song_id_list[$nowplaying];
                 $re=$song->where($search)->find();
                 if ($re==null) {
+                    setcookie('nowplaying','');
                     setcookie('nowplaying',$nowplaying);
                     break;
                 }
                 $re['singer']=$guest->where('id='.$re['singerid'])->getField('nickname');
+                setcookie('nowplaying','');
                 setcookie('nowplaying',$nowplaying);
                 echo json_encode($re);
                 break;
@@ -216,18 +224,25 @@ class IndexAction extends Action{
                 $search['id']=$song_id_list[$nowplaying];
                 $re=$song->where($search)->find();
                 if ($re==null) {
+                    setcookie('nowplaying','');
                     setcookie('nowplaying',$nowplaying);
                     break;
                 }
                 $re['singer']=$guest->where('id='.$re['singerid'])->getField('nickname');
+                setcookie('nowplaying','');
                 setcookie('nowplaying',$nowplaying);
                 echo json_encode($re);
                 break;
             case 'choose'://ajax动作，用作选择歌曲播放,list为0表示全部列表，1表示收藏列表
                 $songid=$this->_param('songid');
                 $list=$this->_param('list');
-                if (!isset($_COOKIE['list'])) {
+                // die(var_dump($list));
+                if ((!isset($_COOKIE['list']))||($list<0)) {
                     $search['id']=$songid;
+                    setcookie('list','');
+                    setcookie('list',json_encode($songid));
+                    setcookie('nowplaying','');
+                    setcookie('nowplaying',0);
                     echo json_encode($song->where($search)->find());
                     die();
                 }
@@ -244,10 +259,12 @@ class IndexAction extends Action{
                 } else {
                     $song_id_list=$song->getField('id',true);
                 }
+                setcookie('list','');
                 setcookie('list',json_encode($song_id_list));
                 $id=$list==1?'songid':'id';
                 foreach ($song_id_list as $key => $value) {
                     if ($value[$id]==$songid) {
+                        setcookie('nowplaying','');
                         setcookie('nowplaying',$key);
                         $search['id']=$songid;
                         $re=$song->where($search)->find();
@@ -373,7 +390,7 @@ class IndexAction extends Action{
                     case 'songname':
                         $search['name']=array('like',$content);
                         foreach ($song->where($search)->select() as $key => $value) {
-                            $result[]="<a href='' onclick='choose(".$value['id'].");return false'>".$value['name']."</a>[BY]<a href='javascript:' onclick='view(".$value['id'].")'>".$value['singer']."</a>";
+                            $result[]="<a href='' onclick='choose(".$value['id'].",-1);return false'>".$value['name']."</a>[BY]<a href='javascript:' onclick='view(".$value['id'].")'>".$value['singer']."</a>";
                         }
                         unset($search);
                         break;
@@ -406,6 +423,41 @@ class IndexAction extends Action{
                     $result[]='好的嘛，找不到呦XD';
                 }
                 echo json_encode($result);
+                break;
+            case 'gettoplist':
+                //获取热门歌曲信息
+                $hotsong_id_list=$hotsong->order('mark desc,id asc')->select();
+                foreach ($hotsong_id_list as $key => $value) {
+                    $search['id']=$value['songid'];
+                    $hotsong_list[]=$song->where($search)->find();
+                    //$search['id']被覆盖，无需清空
+                }
+                unset($search);
+                foreach ($hotsong_list as $key => $value) {
+                    $search['songid']=$value['id'];
+                    $hotsong_list[$key]['mark']=$hotsong->where($search)->getField('mark');
+                    //$search['songid']被覆盖，无需清空
+                }
+                unset($search);
+                $returnlist[]=$hotsong_list;
+                // $this->assign('hotsong_list',$hotsong_list);
+                //获取热门歌手信息
+                $hotsinger_id_list=$hotsinger->order('mark desc,id asc')->select();
+                foreach ($hotsinger_id_list as $key => $value) {
+                    $search['id']=$value['singerid'];
+                    $hotsinger_list[]=$guest->where($search)->find();
+                    //$search['id']被覆盖，无需清空
+                }
+                unset($search);
+                foreach ($hotsinger_list as $key => $value) {
+                    $search['singerid']=$value['id'];
+                    $hotsinger_list[$key]['mark']=$hotsinger->where($search)->getField('mark');
+                    //$search['songid']被覆盖，无需清空
+                }
+                unset($search);
+                $returnlist[]=$hotsinger_list;
+                // $this->assign('hotsinger_list',$hotsinger_list);
+                echo json_encode($returnlist);
                 break;
             default:
                 
