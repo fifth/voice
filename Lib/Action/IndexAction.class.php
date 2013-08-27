@@ -105,17 +105,17 @@ class IndexAction extends Action{
                     $song_list[$key]['singer']=$guest->where('id='.$song_list[$key]['singerid'])->getField('nickname');
                 }
                 unset($search);
-                setcookie('list',json_encode($song_id_list));
-                setcookie('nowplaying',0);
+                // setcookie('list',json_encode($song_id_list));
+                // setcookie('nowplaying',0);
                 // die(var_dump($_COOKIE['nowplaying']));
-                if (!isset($_COOKIE['random'])) {
-                    $this->assign('random',0);
-                    setcookie('random',0);
-                }
-                if (!isset($_COOKIE['circle'])) {
-                    $this->assign('circle',1);
-                    setcookie('circle',1);
-                }
+                // if (!isset($_COOKIE['random'])) {
+                //     $this->assign('random',0);
+                    // setcookie('random',0);
+                // }
+                // if (!isset($_COOKIE['circle'])) {
+                //     $this->assign('circle',1);
+                    // setcookie('circle',1);
+                // }
                 $ajaxreturn['alllist']=$song_list;
                 $ajaxreturn['nowplaying']=0;
                 $ajaxreturn['random']=0;
@@ -133,7 +133,7 @@ class IndexAction extends Action{
                     $guestinfo=$guest->where($search)->find();
                     unset($search);
                     $search['guestid']=$guestinfo['id'];
-                    $song_id_list=$favorite->where($search)->select();
+                    $song_id_list=$favorite->where($search)->order('id')->select();
                     unset($search);
                     $this->assign('favoritelist',$song_id_list);
                     foreach ($song_id_list as $key => $value) {
@@ -150,126 +150,126 @@ class IndexAction extends Action{
                 }
                 echo json_encode($ajaxreturn);
                 break;
-            case 'play'://播放
-                if (!isset($_COOKIE['list'])) {
-                    die();
-                }
-                //从cookie获取播放信息
-                $song_id_list=json_decode($this->cookie2json($_COOKIE['list']),true);
-                if (isset($_COOKIE['nowplaying'])) {
-                    $nowplaying=(int)$_COOKIE['nowplaying'];
-                } else {
-                    $nowplaying=0;
-                }
-                $search['id']=$song_id_list[$nowplaying];
-                $re=$song->where($search)->find();
-                $re['singer']=$guest->where('id='.$re['singerid'])->getField('nickname');
-                echo json_encode($re);
-                break;
-            case 'next'://下一首
-                if (!isset($_COOKIE['list'])) {
-                    die();
-                }
-                //从cookie获取播放信息
-                $song_id_list=json_decode($this->cookie2json($_COOKIE['list']),true);
-                if (isset($_COOKIE['nowplaying'])) {
-                    $nowplaying=(int)$_COOKIE['nowplaying'];
-                } else {
-                    $nowplaying=0;
-                }
-                $circle=$_COOKIE['circle'];
-                $random=$_COOKIE['random'];
-                if ($random==1) {
-                    $nowplaying=rand(0,count($song_id_list)-1);
-                } else {
-                    $nowplaying++;
-                }
-                if (($nowplaying>=count($song_id_list))&&($circle==1)) {
-                    $nowplaying=0;
-                }
-                $search['id']=$song_id_list[$nowplaying];
-                $re=$song->where($search)->find();
-                if ($re==null) {
-                    setcookie('nowplaying',$nowplaying);
-                    break;
-                }
-                $re['singer']=$guest->where('id='.$re['singerid'])->getField('nickname');
-                setcookie('nowplaying',$nowplaying);
-                echo json_encode($re);
-                break;
-            case 'previous'://上一首
-                if (!isset($_COOKIE['list'])) {
-                    die();
-                }
-                //从cookie获取播放信息
-                $song_id_list=json_decode($this->cookie2json($_COOKIE['list']),true);
-                if (isset($_COOKIE['nowplaying'])) {
-                    $nowplaying=(int)$_COOKIE['nowplaying'];
-                } else {
-                    $nowplaying=0;
-                }
-                $circle=$_COOKIE['circle'];
-                $random=$_COOKIE['random'];
-                if ($random==1) {
-                    $nowplaying=rand(0,count($song_id_list)-1);
-                } else {
-                    $nowplaying--;
-                }
-                if (($nowplaying<0)&&($circle==1)) {
-                    $nowplaying=count($song_id_list)-1;
-                }
-                $search['id']=$song_id_list[$nowplaying];
-                $re=$song->where($search)->find();
-                if ($re==null) {
-                    setcookie('nowplaying',$nowplaying);
-                    break;
-                }
-                $re['singer']=$guest->where('id='.$re['singerid'])->getField('nickname');
-                setcookie('nowplaying',$nowplaying);
-                echo json_encode($re);
-                break;
-            case 'choose'://ajax动作，用作选择歌曲播放,list为0表示全部列表，1表示收藏列表
-                $songid=$this->_param('songid');
-                $list=$this->_param('list');
-                // die(var_dump($songid==10));
-                // die(var_dump($list));
-                if ((!isset($_COOKIE['list']))||($list<0)) {
-                    $search['id']=$songid;
-                    setcookie('list',json_encode($songid));
-                    setcookie('nowplaying',0);
-                    echo json_encode($song->where($search)->find());
-                    die();
-                }
-                // $song_id_list=json_decode($this->cookie2json($_COOKIE['list']),true);
+            // case 'play'://播放
+            //     if (!isset($_COOKIE['list'])) {
+            //         die();
+            //     }
+            //     //从cookie获取播放信息
+            //     $song_id_list=json_decode($this->cookie2json($_COOKIE['list']),true);
+            //     if (isset($_COOKIE['nowplaying'])) {
+            //         $nowplaying=(int)$_COOKIE['nowplaying'];
+            //     } else {
+            //         $nowplaying=0;
+            //     }
+            //     $search['id']=$song_id_list[$nowplaying];
+            //     $re=$song->where($search)->find();
+            //     $re['singer']=$guest->where('id='.$re['singerid'])->getField('nickname');
+            //     echo json_encode($re);
+            //     break;
+            // case 'next'://下一首
+            //     if (!isset($_COOKIE['list'])) {
+            //         die();
+            //     }
+            //     //从cookie获取播放信息
+            //     $song_id_list=json_decode($this->cookie2json($_COOKIE['list']),true);
+            //     if (isset($_COOKIE['nowplaying'])) {
+            //         $nowplaying=(int)$_COOKIE['nowplaying'];
+            //     } else {
+            //         $nowplaying=0;
+            //     }
+            //     $circle=$_COOKIE['circle'];
+            //     $random=$_COOKIE['random'];
+            //     if ($random==1) {
+            //         $nowplaying=rand(0,count($song_id_list)-1);
+            //     } else {
+            //         $nowplaying++;
+            //     }
+            //     if (($nowplaying>=count($song_id_list))&&($circle==1)) {
+            //         $nowplaying=0;
+            //     }
+            //     $search['id']=$song_id_list[$nowplaying];
+            //     $re=$song->where($search)->find();
+            //     if ($re==null) {
+            //         setcookie('nowplaying',$nowplaying);
+            //         break;
+            //     }
+            //     $re['singer']=$guest->where('id='.$re['singerid'])->getField('nickname');
+            //     setcookie('nowplaying',$nowplaying);
+            //     echo json_encode($re);
+            //     break;
+            // case 'previous'://上一首
+            //     if (!isset($_COOKIE['list'])) {
+            //         die();
+            //     }
+            //     //从cookie获取播放信息
+            //     $song_id_list=json_decode($this->cookie2json($_COOKIE['list']),true);
+            //     if (isset($_COOKIE['nowplaying'])) {
+            //         $nowplaying=(int)$_COOKIE['nowplaying'];
+            //     } else {
+            //         $nowplaying=0;
+            //     }
+            //     $circle=$_COOKIE['circle'];
+            //     $random=$_COOKIE['random'];
+            //     if ($random==1) {
+            //         $nowplaying=rand(0,count($song_id_list)-1);
+            //     } else {
+            //         $nowplaying--;
+            //     }
+            //     if (($nowplaying<0)&&($circle==1)) {
+            //         $nowplaying=count($song_id_list)-1;
+            //     }
+            //     $search['id']=$song_id_list[$nowplaying];
+            //     $re=$song->where($search)->find();
+            //     if ($re==null) {
+            //         setcookie('nowplaying',$nowplaying);
+            //         break;
+            //     }
+            //     $re['singer']=$guest->where('id='.$re['singerid'])->getField('nickname');
+            //     setcookie('nowplaying',$nowplaying);
+            //     echo json_encode($re);
+            //     break;
+            // case 'choose'://ajax动作，用作选择歌曲播放,list为0表示全部列表，1表示收藏列表
+            //     $songid=$this->_param('songid');
+            //     $list=$this->_param('list');
+            //     // die(var_dump($songid==10));
+            //     // die(var_dump($list));
+            //     if ((!isset($_COOKIE['list']))||($list<0)) {
+            //         $search['id']=$songid;
+            //         setcookie('list',json_encode($songid));
+            //         setcookie('nowplaying',0);
+            //         echo json_encode($song->where($search)->find());
+            //         die();
+            //     }
+            //     // $song_id_list=json_decode($this->cookie2json($_COOKIE['list']),true);
                 
-                if (($list>0)&&($a!=0)) {
-                    // $search['stuid']=$a['stuid'];
-                    // $guestinfo=$guest->where($search)->find();
-                    // unset($search);
-                    $search['guestid']=$list;
-                    $song_id_list=$favorite->where($search)->getField('songid',true);
-                    unset($search);
-                } else {
-                    $song_id_list=$song->getField('id',true);
-                }
-                setcookie('list',json_encode($song_id_list));
-                if ($list==0) {
-                    $id='id';
-                } else {
-                    $id='songid';
-                }
-                die(var_dump($songid));
-                foreach ($song_id_list as $key => $value) {
-                    if ($value[$id]==$songid) {
-                        setcookie('nowplaying',$key);
-                        $search['id']=$songid;
-                        $re=$song->where($search)->find();
-                        $re['singer']=$guest->where('id='.$re['singerid'])->getField('nickname');
-                        echo json_encode($re);
-                        die();
-                    }
-                }
-                break;
+            //     if (($list>0)&&($a!=0)) {
+            //         // $search['stuid']=$a['stuid'];
+            //         // $guestinfo=$guest->where($search)->find();
+            //         // unset($search);
+            //         $search['guestid']=$list;
+            //         $song_id_list=$favorite->where($search)->getField('songid',true);
+            //         unset($search);
+            //     } else {
+            //         $song_id_list=$song->getField('id',true);
+            //     }
+            //     setcookie('list',json_encode($song_id_list));
+            //     if ($list==0) {
+            //         $id='id';
+            //     } else {
+            //         $id='songid';
+            //     }
+            //     // die(var_dump($songid));
+            //     foreach ($song_id_list as $key => $value) {
+            //         if ($value[$id]==$songid) {
+            //             setcookie('nowplaying',$key);
+            //             $search['id']=$songid;
+            //             $re=$song->where($search)->find();
+            //             $re['singer']=$guest->where('id='.$re['singerid'])->getField('nickname');
+            //             echo json_encode($re);
+            //             die();
+            //         }
+            //     }
+            //     break;
             case 'like'://收藏或者取消收藏歌曲
                 //检查是否已登陆，若未登录则跳转回首页
                 if ($a==0) {
@@ -1137,9 +1137,9 @@ class IndexAction extends Action{
             $this->assign('favorite_list',$favorite_list);
         }
         //设置cookie
-        setcookie('list',json_encode($song_id_list));
-        setcookie('nowplaying',-1);
-        setcookie('mode',1);
+        // setcookie('list',json_encode($song_id_list));
+        // setcookie('nowplaying',-1);
+        // setcookie('mode',1);
 
         $this->assign('song_list',$song_list);
         $this->display();
@@ -1281,9 +1281,9 @@ class IndexAction extends Action{
             die();
         }
         //清除cookie
-        setcookie('list','');
-        setcookie('mode','');
-        setcookie('nowplaying','');
+        // setcookie('list','');
+        // setcookie('mode','');
+        // setcookie('nowplaying','');
         //获取用户信息
         $search['stuid']=$a['stuid'];
         $guestinfo=$guest->where($search)->find();
@@ -1412,9 +1412,9 @@ class IndexAction extends Action{
             die();
         }
         //清除cookie
-        setcookie('list','');
-        setcookie('mode','');
-        setcookie('nowplaying','');
+        // setcookie('list','');
+        // setcookie('mode','');
+        // setcookie('nowplaying','');
         //获取用户数据
         $search['stuid']=$a['stuid'];
         $guestinfo=$guest->where($search)->find();
@@ -1431,9 +1431,9 @@ class IndexAction extends Action{
         $hotsong=M('hotsong');
         $hotsinger=M('hotsinger');
         //清除cookie
-        setcookie('list','');
-        setcookie('mode','');
-        setcookie('nowplaying','');
+        // setcookie('list','');
+        // setcookie('mode','');
+        // setcookie('nowplaying','');
         //验证是否登陆
         $a=$this->check_session();
         if ($a!=0) {

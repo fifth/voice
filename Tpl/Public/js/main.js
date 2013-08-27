@@ -250,6 +250,11 @@ function choose(songid,list) {
 			currentlist=favoritelist;
 			break;
 		case 2:
+			for (var i = 0; i < alllist.length; i++) {
+				if (alllist[i]['id']==songid) {
+					currentlist[0]=alllist[i];
+				}
+			}
 			break;
 		default:
 			break;
@@ -257,6 +262,7 @@ function choose(songid,list) {
 	for (var i = 0; i < currentlist.length; i++) {
 		if (currentlist[i]['id']==songid) {
 			now=currentlist[i];
+			nowplaying=i;
 		}
 	}
 	// now=currentlist[songid];
@@ -350,9 +356,10 @@ function view(uid) {
 				for (var i = 0; i < data[1].length; i++) {
 					htmldata += "<li><a href='javascript:' onclick='choose(";
 					htmldata += data[1][i].id;
-					htmldata += ",";
-					htmldata += data[0].id;
-					htmldata +=")'>";
+					htmldata += ",2)'>";
+					// htmldata += ",";
+					// htmldata += data[0].id;
+					// htmldata +=")'>";
 					htmldata += data[1][i].name;
 					htmldata += "</a>[BY]<a href='javascript:' onclick='view(";
 					htmldata += data[1][i].singerid;
@@ -672,7 +679,7 @@ function next_click(){
 }
 function next(now){
 	if (random==1) {
-		nowplaying=Math.floor(random()*currentlist.length);
+		nowplaying=Math.floor(Math.random()*currentlist.length);
 	} else {
 		nowplaying++;
 	}
@@ -698,7 +705,7 @@ function previous_click(){
 }
 function previous(now){
 	if (random==1) {
-		nowplaying=Math.floor(random()*currentlist.length);
+		nowplaying=Math.floor(Math.random()*currentlist.length);
 	} else {
 		nowplaying--;
 	}
