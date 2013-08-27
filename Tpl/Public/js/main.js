@@ -1,3 +1,5 @@
+
+
 //js操作cookie函数
 function SetCookie (name, value) { 
     var exp = new Date(); 
@@ -31,6 +33,13 @@ function GetCookie(name) {
 
 //全局变量，用作储存当前播放歌曲的信息，json格式
 var now;
+// 定义全局变量
+var alllist='';//所有歌曲的列表
+var favoritelist='';//收藏的列表
+var currentlist='';//当前播放的列表
+var nowplaying=0;//当前播放歌曲的序号
+var circle=1;//是否循环
+var random=0;//是否随机
 
 function slidein(boxname) {
 	$('#'+boxname).css('display','block');
@@ -80,40 +89,54 @@ function slide(boxname) {
 		slideout('viewbox');
 		slideout('toplistbox');
 		// listen_reset();
-		$.get('/fifth/voice/index.php/Index/ajax?action=getalllist',function(data){
+		$.get('/fifth/voice/index.php/Index/ajax?action=getsonglist',function(data){
 			data = eval("("+data+")");
+			nowplaying=data['nowplaying'];
+			// alert(nowplaying);
+			alllist=data['alllist'];
+			// alert(alllist);
+			if (data['random']) {
+				random=data['random'];
+			}
+			if (data['circle']) {
+				circle=data['circle'];
+			}
+			// alert(random);
 			$('#alllist').empty();
 			var htmldata = '<ul>';
-			for (var i = 0; i < data.length; i++) {
+			for (var i = 0; i < alllist.length; i++) {
 				htmldata += "<li><a href='javascript:' onclick='choose(";
-				htmldata += data[i].id;
+				htmldata += alllist[i].id;
 				htmldata += ",0)'>";
-				htmldata += data[i].name;
+				htmldata += alllist[i].name;
 				htmldata += "</a>[BY]<a href='javascript:' onclick='view(";
-				htmldata += data[i].singerid;
+				htmldata += alllist[i].singerid;
 				htmldata += ")'>";
-				htmldata += data[i].singer;
+				htmldata += alllist[i].singer;
 				htmldata += "</a></li>";
 			};
 			htmldata += '</ul>';
 			$('#alllist').append(htmldata);
-		});
-		$.get('/fifth/voice/index.php/Index/ajax?action=getfavoritelist',function(data){
-			data = eval("("+data+")");
+			// alert({$random});
+		// });
+		// $.get('/fifth/voice/index.php/Index/ajax?action=getfavoritelist',function(data){
+		// 	data = eval("("+data+")");
+			favoritelist=data['favoritelist'];
 			$('#favoritelist').empty();
 			htmldata = '<ul>';
-			if (data!=0) {
-				for (var i = 0; i < data.length; i++) {
+			if (favoritelist!=0) {
+				for (var i = 0; i < favoritelist.length; i++) {
 					htmldata += "<li><a href='javascript:' onclick='choose(";
-					htmldata += data[i].id;
-					htmldata += ",";
-					htmldata += $('.passport li:eq(1) a').attr('onclick').slice(5,$('.passport li:eq(1) a').attr('onclick').indexOf(')'));
-					htmldata += ")'>";
-					htmldata += data[i].name;
+					htmldata += favoritelist[i].id;
+					htmldata += ",1)'>";
+					// htmldata += ",";
+					// htmldata += $('.passport li:eq(1) a').attr('onclick').slice(5,$('.passport li:eq(1) a').attr('onclick').indexOf(')'));
+					// htmldata += ")'>";
+					htmldata += favoritelist[i].name;
 					htmldata += "</a>[BY]<a href='javascript:' onclick='view(";
-					htmldata += data[i].singerid;
+					htmldata += favoritelist[i].singerid;
 					htmldata += ")'>";
-					htmldata += data[i].singer;
+					htmldata += favoritelist[i].singer;
 					htmldata += "</a></li>";
 				};
 			} else {
@@ -121,31 +144,27 @@ function slide(boxname) {
 			}
 			htmldata += '</ul>';
 			$('#favoritelist').append(htmldata);
+			currentlist=alllist;
+			$('#jquery_jplayer_1').jPlayer({
+				ready:function(){
+					now=currentlist[nowplaying];
+					detail();
+					$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
+						mp3: '/fifth/voice/Upload/song/'+now.address
+					}).jPlayer('play');
+				},
+				ended:function(){
+					now=currentlist[next(nowplaying)];
+					detail();
+					$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
+						mp3: '/fifth/voice/Upload/song/'+now.address
+					}).jPlayer('play');
+				},
+				swfPath:'/fifth/voice/Tpl/Public',
+				supplied:'mp3'
+			});
+
 		});
-		// alert(GetCookie('list'));
-		$('#jquery_jplayer_1').jPlayer({
-		ready:function(){
-			$.get('/fifth/voice/index.php/Index/ajax?action=play',function(data){
-				now=data;
-				detail();
-				$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
-					mp3: '/fifth/voice/Upload/song/'+data.address
-				}).jPlayer('play');
-			},'json');
-		},
-		ended:function(){
-			$.get('/fifth/voice/index.php/Index/ajax?action=next',function(data){
-				now=data;
-				detail();
-				$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
-					mp3: '/fifth/voice/Upload/song/'+data.address
-				}).jPlayer('play');
-			},'json');
-		},
-		swfPath:'/fifth/voice/Tpl/Public',
-		supplied:'mp3'
-		});
-		// alert('s');
 		break;
 	case 'viewbox':
 		slideout('searchbox');
@@ -223,12 +242,35 @@ function listen_start() {
 }
 //选择歌曲播放
 function choose(songid,list) {
-	$.get('/fifth/voice/index.php/Index/ajax?action=choose&songid='+songid+'&list='+list,function(data){
-		now=data;
-		detail();
-		$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
-			mp3: '/fifth/voice/Upload/song/'+data.address
-		}).jPlayer('play');
+	switch (list) {
+		case 0:
+			currentlist=alllist;
+			break;
+		case 1:
+			currentlist=favoritelist;
+			break;
+		case 2:
+			break;
+		default:
+			break;
+	}
+	for (var i = 0; i < currentlist.length; i++) {
+		if (currentlist[i]['id']==songid) {
+			now=currentlist[i];
+		}
+	}
+	// now=currentlist[songid];
+	detail();
+	$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
+		mp3: '/fifth/voice/Upload/song/'+now.address
+	}).jPlayer('play');
+	
+	// $.get('/fifth/voice/index.php/Index/ajax?action=choose&songid='+songid+'&list='+list,function(data){
+	// 	now=data;
+	// 	detail();
+	// 	$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
+	// 		mp3: '/fifth/voice/Upload/song/'+data.address
+	// 	}).jPlayer('play');
 		// $('#jquery_jplayer_1').jPlayer({
 			
 			
@@ -253,7 +295,7 @@ function choose(songid,list) {
 		// swfPath:'/fifth/voice/Tpl/Public',
 		// supplied:'mp3'
 		// });
-	},'json');
+	// },'json');
 }
 
 //显示当前播放歌曲的信息
@@ -577,9 +619,7 @@ $(document).ready(function() {
 
 /*****************************************************/
 function random_click(){
-	random=GetCookie('random');
-	DelCookie('random');
-	SetCookie('random', 1-random);
+	random=1-random;
 	if (random==0) {
 		$(".jp-random").css("background-image","url(/fifth/voice/Tpl/Public/pic/random_hover.png)");
 	} else {
@@ -590,16 +630,14 @@ function random_hover(){
 	$(".jp-random").css("background-image","url(/fifth/voice/Tpl/Public/pic/random_hover.png)");
 }
 function random_default(){
-	if (GetCookie('random')==1) {
+	if (random==1) {
 		$(".jp-random").css("background-image","url(/fifth/voice/Tpl/Public/pic/random_hover.png)");
 	} else {
 		$(".jp-random").css("background-image","url(/fifth/voice/Tpl/Public/pic/random.png)");
 	}
 }
 function circle_click(){
-	circle=GetCookie('circle');
-	DelCookie('circle');
-	SetCookie('circle', 1-circle);
+	circle=1-circle;
 	if (circle==0) {
 		$(".jp-circle").css("background-image","url(/fifth/voice/Tpl/Public/pic/circle_hover.png)");
 	} else {
@@ -610,31 +648,64 @@ function circle_hover(){
 	$(".jp-circle").css("background-image","url(/fifth/voice/Tpl/Public/pic/circle_hover.png)");
 }
 function circle_default(){
-	if (GetCookie('circle')==1) {
+	if (circle==1) {
 		$(".jp-circle").css("background-image","url(/fifth/voice/Tpl/Public/pic/circle_hover.png)");
 	} else {
 		$(".jp-circle").css("background-image","url(/fifth/voice/Tpl/Public/pic/circle.png)");
 	}
 }
 function next_click(){
-	$.get('/fifth/voice/index.php/Index/ajax?action=next',function(data){
-		if (data==null) listen_reset();
-		now=data;
-		detail();
-		$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
-			mp3 :'/fifth/voice/Upload/song/'+now.address
-		}).jPlayer('play');
-	},'json');
+	now=currentlist[next(nowplaying)];
+	detail();
+	$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
+		mp3: '/fifth/voice/Upload/song/'+now.address
+	}).jPlayer('play');
+
+	// $.get('/fifth/voice/index.php/Index/ajax?action=next',function(data){
+	// 	if (data==null) listen_reset();
+	// 	now=data;
+	// 	detail();
+	// 	$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
+	// 		mp3 :'/fifth/voice/Upload/song/'+now.address
+	// 	}).jPlayer('play');
+	// },'json');
+}
+function next(now){
+	if (random==1) {
+		nowplaying=Math.floor(random()*currentlist.length);
+	} else {
+		nowplaying++;
+	}
+	if ((nowplaying>=currentlist.length)&&(circle==1)) {
+		nowplaying=0;
+	}
+	return nowplaying;
 }
 function previous_click(){
-	$.get('/fifth/voice/index.php/Index/ajax?action=previous',function(data){
-		if (data==null) listen_reset();
-		now=data;
-		detail();
-		$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
-			mp3 :'/fifth/voice/Upload/song/'+now.address
-		}).jPlayer('play');
-	},'json');
+	now=currentlist[previous(nowplaying)];
+	detail();
+	$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
+		mp3: '/fifth/voice/Upload/song/'+now.address
+	}).jPlayer('play');
+	// $.get('/fifth/voice/index.php/Index/ajax?action=previous',function(data){
+	// 	if (data==null) listen_reset();
+	// 	now=data;
+	// 	detail();
+	// 	$('#jquery_jplayer_1').jPlayer('clearMedia').jPlayer('setMedia',{
+	// 		mp3 :'/fifth/voice/Upload/song/'+now.address
+	// 	}).jPlayer('play');
+	// },'json');
+}
+function previous(now){
+	if (random==1) {
+		nowplaying=Math.floor(random()*currentlist.length);
+	} else {
+		nowplaying--;
+	}
+	if ((nowplaying<0)&&(circle==1)) {
+		nowplaying=currentlist.length-1;
+	}
+	return nowplaying;
 }
 function like_hover(){
 	$(".jp-like").css("background-image","url(/fifth/voice/Tpl/Public/pic/like_hover.png)");
@@ -653,26 +724,27 @@ function like_click(){
 	} else {
 		action=0;
 	}
-	$.get('/fifth/voice/index.php/Index/ajax?action=like',function(data){
+	$.get('/fifth/voice/index.php/Index/ajax?action=like&songid='+currentlist[nowplaying].id,function(data){
 		if (data) {
 			$(".jp-like").css("background-image","url(/fifth/voice/Tpl/Public/pic/like_hover.png)");
 		} else if (!action) {
 			$(".jp-like").css("background-image","url(/fifth/voice/Tpl/Public/pic/like.png)");
 		}
-		$.get('/fifth/voice/index.php/Index/ajax?action=getfavoritelist',function(data){
+		$.get('/fifth/voice/index.php/Index/ajax?action=getsonglist',function(data){
 			data = eval("("+data+")");
+			favoritelist=data['favoritelist'];
 			$('#favoritelist').empty();
 			htmldata = '<ul>';
 			if (data!=0) {
-				for (var i = 0; i < data.length; i++) {
+				for (var i = 0; i < favoritelist.length; i++) {
 					htmldata += "<li><a href='javascript:' onclick='choose(";
-					htmldata += data[i].id;
+					htmldata += favoritelist[i].id;
 					htmldata += ",1)'>";
-					htmldata += data[i].name;
+					htmldata += favoritelist[i].name;
 					htmldata += "</a>[BY]<a href='javascript:' onclick='view(";
-					htmldata += data[i].singerid;
+					htmldata += favoritelist[i].singerid;
 					htmldata += ")'>";
-					htmldata += data[i].singer;
+					htmldata += favoritelist[i].singer;
 					htmldata += "</a></li>";
 				};
 			} else {
